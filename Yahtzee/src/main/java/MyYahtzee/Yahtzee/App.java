@@ -24,7 +24,33 @@ public class App {
 
 		App app = new App();
 
-		
+	}
+
+	public int returnIntFor(String input, int max) {
+
+		System.out.println(input);
+
+		int res = 0;
+
+		try {
+
+			res = Integer.parseInt(reader.readLine());
+
+			if (res < 1 || res > max) {
+
+				throw new NumberFormatException();
+			}
+
+		} catch (NumberFormatException e) {
+
+			System.out.println("Input is not valid!");
+
+			return returnIntFor(input, max);
+
+		} catch (IOException e) {
+
+		}
+		return res;
 	}
 
 }
