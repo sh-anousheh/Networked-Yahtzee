@@ -48,4 +48,12 @@ public class RulesTest extends TestCase {
 
 	}
 
+	public void testTwos() {
+
+		ruleClass.play(new int[] { 1, 2, 6, 4, 1 }, 2);
+
+		assertEquals((Integer) 1, ruleClass.getFinalDic().get(box.Twos.name()));
+
+	}
+
 }
