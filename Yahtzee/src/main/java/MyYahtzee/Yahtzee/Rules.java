@@ -1,5 +1,7 @@
 package MyYahtzee.Yahtzee;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Rules {
@@ -18,4 +20,22 @@ public class Rules {
 
 		return dice;
 	}
+
+	public Map<Integer, Integer> countDice(int[] Dice) {
+
+		Map<Integer, Integer> countDic = new HashMap<Integer, Integer>();
+
+		for (int i = 1; i <= 6; i++) {
+
+			countDic.put(i, 0);
+		}
+
+		for (int i = 0; i < 5; i++) {
+
+			countDic.replace(Dice[i], countDic.get(Dice[i]) + 1);
+		}
+
+		return countDic;
+	}
+
 }

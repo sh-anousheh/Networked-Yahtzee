@@ -1,5 +1,7 @@
 package MyYahtzee.Yahtzee;
 
+import java.util.Map;
+import static org.junit.Assert.assertArrayEquals;
 import junit.framework.TestCase;
 
 public class RulesTest extends TestCase {
@@ -7,6 +9,7 @@ public class RulesTest extends TestCase {
 	private Rules ruleClass;
 
 	public RulesTest() {
+
 		ruleClass = new Rules();
 	}
 
