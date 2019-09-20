@@ -56,4 +56,11 @@ public class RulesTest extends TestCase {
 
 	}
 
+	public void testThrees() {
+
+		ruleClass.play(new int[] { 3, 2, 3, 3, 3 }, 3);
+
+		assertEquals((Integer) 4, ruleClass.getFinalDic().get(box.Threes.name()));
+
+	}
 }
