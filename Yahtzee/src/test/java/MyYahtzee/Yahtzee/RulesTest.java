@@ -1,17 +1,12 @@
 package MyYahtzee.Yahtzee;
 
-import static org.junit.Assert.assertArrayEquals;
-
-import java.util.Map;
-
-import Game1.YahtzeeGame.Rules.box;
 import junit.framework.TestCase;
 
-public class RulesTests extends TestCase {
+public class RulesTest extends TestCase {
 
 	private Rules ruleClass;
 
-	public RulesTests() {
+	public RulesTest() {
 		ruleClass = new Rules();
 	}
 
