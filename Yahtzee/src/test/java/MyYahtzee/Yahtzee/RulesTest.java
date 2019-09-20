@@ -1,6 +1,7 @@
 package MyYahtzee.Yahtzee;
 
 import java.util.Map;
+import MyYahtzee.Yahtzee.Rules.box;
 import static org.junit.Assert.assertArrayEquals;
 import junit.framework.TestCase;
 
@@ -37,6 +38,14 @@ public class RulesTest extends TestCase {
 		Map<Integer, Integer> counter = ruleClass.countDice(testDice);
 
 		assertArrayEquals(counter.values().toArray(), new Object[] { 0, 2, 1, 0, 0, 2 });
+	}
+
+	public void testOnes() {
+
+		ruleClass.play(new int[] { 1, 4, 6, 1, 1 }, 1);
+
+		assertEquals((Integer) 3, ruleClass.getFinalDic().get(box.Aces.name()));
+
 	}
 
 }
