@@ -46,6 +46,27 @@ public class App {
 
 	}
 
+	public int[] holdSomeDice(String line, int[] dice, Rules game) {
+
+		String[] position = line.split(" ");
+
+		int[] reRoled = game.rolling(5 - position.length);
+
+		int[] newDice = new int[5];
+
+		for (int i = 0; i < position.length; i++) {
+
+			newDice[i] = dice[Integer.parseInt(position[i]) - 1];
+		}
+
+		for (int i = 0; i < reRoled.length; i++) {
+
+			newDice[4 - i] = reRoled[i];
+		}
+
+		return newDice;
+	}
+
 	public String returnStringFor(String input) {
 
 		System.out.println(input);
