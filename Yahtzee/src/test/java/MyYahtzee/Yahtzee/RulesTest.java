@@ -63,7 +63,7 @@ public class RulesTest extends TestCase {
 		assertEquals((Integer) 4, ruleClass.getFinalDic().get(box.Threes.name()));
 
 	}
-	
+
 	public void testFours() {
 
 		ruleClass.play(new int[] { 4, 2, 4, 3, 3 }, 4);
@@ -71,4 +71,13 @@ public class RulesTest extends TestCase {
 		assertEquals((Integer) 2, ruleClass.getFinalDic().get(box.Fours.name()));
 
 	}
+
+	public void testFives() {
+
+		ruleClass.play(new int[] { 4, 5, 5, 5, 3 }, 5);
+
+		assertEquals((Integer) 3, ruleClass.getFinalDic().get(box.Fives.name()));
+
+	}
+
 }
