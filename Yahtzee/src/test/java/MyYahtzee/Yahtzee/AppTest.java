@@ -13,13 +13,14 @@ public class AppTest extends TestCase {
 		app = new App();
 	}
 
-	/*public void testReturnIntFor() {
+	/*
+	 * public void testReturnIntFor() {
+	 * 
+	 * int res = app.returnIntFor("Write input between 1 and 6", 6);
+	 * 
+	 * assertTrue(res > 0 && res <= 6); }
+	 */
 
-		int res = app.returnIntFor("Write input between 1 and 6", 6);
-
-		assertTrue(res > 0 && res <= 6);
-	}*/
-	
 	public void testHoldSomeDice() {
 
 		Random rand = new Random();
@@ -46,27 +47,29 @@ public class AppTest extends TestCase {
 
 		boolean pass = true;
 
-		for (int i = 0; i < 5; i++) {
-
-			System.out.print(dice[i]);
-		}
-
-		System.out.println();
-
-		for (int i = 0; i < 5; i++) {
-
-			System.out.print(newDice[i]);
-		}
-
-		System.out.println(holds.toString());
-
+		/*
+		 * for (int i = 0; i < 5; i++) {
+		 * 
+		 * System.out.print(dice[i]); }
+		 * 
+		 * System.out.println();
+		 * 
+		 * for (int i = 0; i < 5; i++) {
+		 * 
+		 * System.out.print(newDice[i]); }
+		 * 
+		 * System.out.println(holds.toString());
+		 */
 		int i = 0;
 
 		for (Object o : holds) {
 
 			if (newDice[i] != dice[Integer.parseInt(o.toString()) - 1]) {
+
 				pass = false;
+
 				break;
+
 			}
 
 			i++;
