@@ -44,6 +44,49 @@ public class App {
 
 		int holdCount = 1;
 
+		do {
+
+			Arrays.sort(dice);
+
+			System.out.println(String.format("Your rolled:\t|%d|\t|%d|\t|%d|\t|%d|\t|%d|", dice[0], dice[1], dice[2],
+					dice[3], dice[4]));
+
+			action = app.returnIntFor("What action do you like to perform next?"
+					+ "\n(1) Select dice to hold and then re-roll the other dice?" + "\n(2) Re-roll all the dice?"
+					+ "\n(3) Score this round?", 3);
+
+			switch (action) {
+
+			case 1:
+
+				String line = app.returnStringFor("Please enter in the dice position that you want to hold."
+						+ " Please seperate each number with a <<SPACE>>:");
+
+				dice = app.holdSomeDice(line, dice, game);
+
+				holdCount++;
+
+				break;
+
+			case 2:
+
+				dice = game.rolling(5);
+
+				holdCount++;
+
+				break;
+
+			}
+
+		} while (action <= 2 && holdCount < 3);
+
+		Arrays.sort(dice);
+
+		System.out.println(String.format("Your rolled:\t|%d|\t|%d|\t|%d|\t|%d|\t|%d|", dice[0], dice[1], dice[2],
+				dice[3], dice[4]));
+
+		int ChoosenCat = app.returnIntFor("What category do you want to score this round againts?", 13);
+
 	}
 
 	public int[] holdSomeDice(String line, int[] dice, Rules game) {
