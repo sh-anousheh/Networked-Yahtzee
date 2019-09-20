@@ -63,4 +63,12 @@ public class RulesTest extends TestCase {
 		assertEquals((Integer) 4, ruleClass.getFinalDic().get(box.Threes.name()));
 
 	}
+	
+	public void testFours() {
+
+		ruleClass.play(new int[] { 4, 2, 4, 3, 3 }, 4);
+
+		assertEquals((Integer) 2, ruleClass.getFinalDic().get(box.Fours.name()));
+
+	}
 }
