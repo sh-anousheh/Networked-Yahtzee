@@ -83,4 +83,44 @@ public class Rules {
 		return countDic;
 	}
 
+	public boolean play(int[] dice, int choosen) {
+
+		boolean res = false;
+
+		Map<Integer, Integer> numCount = countDice(dice);
+
+		upperSection(numCount);
+
+		for (box b : box.values()) {
+
+			if (b.ordinal() + 1 == choosen) {
+
+				finalDic.put(b.name(), initDic.get(b.name()));
+
+				score +=
+
+						initDic.remove(b.name());
+
+				return true;
+			}
+		}
+		return res;
+
+	}
+
+	private void upperSection(Map<Integer, Integer> numCount) {
+
+		initDic.replace(box.Aces.name(), numCount.get(1));
+
+		initDic.replace(box.Twos.name(), numCount.get(2));
+
+		initDic.replace(box.Threes.name(), numCount.get(3));
+
+		initDic.replace(box.Fours.name(), numCount.get(4));
+
+		initDic.replace(box.Fives.name(), numCount.get(5));
+
+		initDic.replace(box.Sixes.name(), numCount.get(6));
+	}
+
 }
