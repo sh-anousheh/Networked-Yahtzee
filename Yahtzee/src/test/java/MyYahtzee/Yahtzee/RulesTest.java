@@ -26,4 +26,14 @@ public class RulesTest extends TestCase {
 
 		assertEquals(true, pass);
 	}
+
+	public void testCountDice() {
+
+		int[] testDice = new int[] { 3, 2, 6, 6, 2 };
+
+		Map<Integer, Integer> counter = ruleClass.countDice(testDice);
+
+		assertArrayEquals(counter.values().toArray(), new Object[] { 0, 2, 1, 0, 0, 2 });
+	}
+
 }
