@@ -149,4 +149,13 @@ public class RulesTest extends TestCase {
 
 	}
 
+	public void testYahtzee() {
+
+		int[] Dice = new int[] { 4, 4, 4, 4, 4 };
+
+		ruleClass.play(Dice, 13);
+
+		assertEquals((Integer) 50, ruleClass.getFinalDic().get(box.Yahtzee.name()));
+
+	}
 }

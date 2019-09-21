@@ -51,11 +51,6 @@ public class Rules {
 		Chance, Yahtzee
 	}
 
-	/*
-	 * public enum box { Aces, Twos, Threes, Fours, Fives, Sixes, ThreeOfAKind,
-	 * FourOfAKind, FullHouse, SmallStraight, LargeStraight, Yahtzee, Chance }
-	 */
-
 	public int[] rolling(int diceNum) {
 
 		int[] dice = new int[diceNum];
@@ -156,8 +151,31 @@ public class Rules {
 						break;
 					}
 				}
-			}
-		}
-	}
+			} else if (c >= 4) {
 
+				initDic.replace(box.ThreeOfAKind.name(), sum);
+
+				initDic.replace(box.FourOfAKind.name(), sum);
+
+				if (c == 5) {
+
+					if (initDic.get(box.Yahtzee.name()) == 0) {
+
+						initDic.replace(box.Yahtzee.name(), 50);
+
+					}
+
+					else {
+
+						initDic.replace(box.Yahtzee.name(), initDic.get(box.Yahtzee.name() + 100));
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
 }
