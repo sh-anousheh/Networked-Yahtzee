@@ -213,8 +213,24 @@ public class RulesTest extends TestCase {
 			}
 		};
 
-		assertEquals(35, ruleClass.calculateBonus());
+		assertEquals(35, ruleClass.calculateBonus(scores));
 
 	}
 
+	public void testCalculateBonus2() {
+
+		Map<String, Integer> scores = new HashMap<String, Integer>() {
+			{
+				put(box.Aces.name(), 1);
+				put(box.Twos.name(), 0);
+				put(box.Threes.name(), 3);
+				put(box.Fours.name(), 8);
+				put(box.Fives.name(), 15);
+				put(box.Sixes.name(), 6);
+			}
+		};
+
+		assertEquals(0, ruleClass.calculateBonus(scores));
+
+	}
 }
