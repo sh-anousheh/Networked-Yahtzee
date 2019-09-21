@@ -79,7 +79,7 @@ public class RulesTest extends TestCase {
 		assertEquals((Integer) 3, ruleClass.getFinalDic().get(box.Fives.name()));
 
 	}
-	
+
 	public void testSixes() {
 
 		ruleClass.play(new int[] { 6, 5, 5, 6, 3 }, 6);
@@ -87,7 +87,7 @@ public class RulesTest extends TestCase {
 		assertEquals((Integer) 2, ruleClass.getFinalDic().get(box.Sixes.name()));
 
 	}
-	
+
 	public void testThreeOfAKind() {
 
 		int[] Dice = new int[] { 6, 2, 3, 2, 2 };
@@ -102,6 +102,16 @@ public class RulesTest extends TestCase {
 		ruleClass.play(Dice, 10);
 
 		assertEquals((Integer) sum, ruleClass.getFinalDic().get(box.ThreeOfAKind.name()));
+
+	}
+
+	public void testFullHouse() {
+
+		int[] Dice = new int[] { 5, 2, 5, 2, 5 };
+
+		ruleClass.play(Dice, 9);
+
+		assertEquals((Integer) 25, ruleClass.getFinalDic().get(box.FullHouse.name()));
 
 	}
 
