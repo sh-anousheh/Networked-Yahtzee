@@ -1,5 +1,6 @@
 package MyYahtzee.Yahtzee;
 
+import java.util.HashMap;
 import java.util.Map;
 import MyYahtzee.Yahtzee.Rules.box;
 import static org.junit.Assert.assertArrayEquals;
@@ -196,6 +197,23 @@ public class RulesTest extends TestCase {
 		ruleClass.play(Dice, 7);
 
 		assertEquals((Integer) 40, ruleClass.getFinalDic().get(box.LargeStraight.name()));
+
+	}
+
+	public void testCalculateBonus() {
+
+		Map<String, Integer> scores = new HashMap<String, Integer>() {
+			{
+				put(box.Aces.name(), 3);
+				put(box.Twos.name(), 8);
+				put(box.Threes.name(), 3);
+				put(box.Fours.name(), 16);
+				put(box.Fives.name(), 15);
+				put(box.Sixes.name(), 30);
+			}
+		};
+
+		assertEquals(35, ruleClass.calculateBonus());
 
 	}
 
