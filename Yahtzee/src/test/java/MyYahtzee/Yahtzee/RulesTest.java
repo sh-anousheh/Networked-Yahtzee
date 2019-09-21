@@ -87,5 +87,22 @@ public class RulesTest extends TestCase {
 		assertEquals((Integer) 2, ruleClass.getFinalDic().get(box.Sixes.name()));
 
 	}
+	
+	public void testThreeOfAKind() {
+
+		int[] Dice = new int[] { 6, 2, 3, 2, 2 };
+
+		int sum = 0;
+
+		for (int i : Dice) {
+
+			sum += i;
+		}
+
+		ruleClass.play(Dice, 15);
+
+		assertEquals((Integer) sum, ruleClass.getFinalDic().get(box.ThreeOfAKind.name()));
+
+	}
 
 }
