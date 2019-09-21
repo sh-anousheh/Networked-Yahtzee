@@ -91,6 +91,8 @@ public class Rules {
 
 		upperSection(numCount);
 
+		lowerSection(numCount);
+
 		for (box b : box.values()) {
 
 			if (b.ordinal() + 1 == choosen) {
@@ -121,6 +123,36 @@ public class Rules {
 		initDic.replace(box.Fives.name(), numCount.get(5));
 
 		initDic.replace(box.Sixes.name(), numCount.get(6));
+	}
+
+	private void lowerSection(Map<Integer, Integer> numCount) {
+
+		int sum = 0;
+
+		for (int i = 1; i <= numCount.size(); i++) {
+
+			sum += i * numCount.get(i);
+		}
+
+		initDic.replace(box.Chance.name(), sum);
+
+		for (Integer c : numCount.values()) {
+
+			if (c == 3) {
+
+				initDic.replace(box.ThreeOfAKind.name(), sum);
+
+				for (Integer cc : numCount.values()) {
+
+					if (cc == 2) {
+
+						initDic.replace(box.FullHouse.name(), 25);
+
+						break;
+					}
+				}
+			}
+		}
 	}
 
 }
