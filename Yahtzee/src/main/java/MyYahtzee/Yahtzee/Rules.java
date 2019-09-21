@@ -176,6 +176,7 @@ public class Rules {
 				}
 
 			}
+
 			if (numCount.get(1) > 0 && numCount.get(2) > 0 && numCount.get(3) > 0 && numCount.get(4) > 0) {
 
 				initDic.replace(box.SmallStraight.name(), 30);

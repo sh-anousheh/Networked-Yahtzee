@@ -22,71 +22,84 @@ public class App {
 
 	public static void main(String[] args) {
 
-		int round = 1;
-
 		App app = new App();
 
 		Rules game = new Rules();
 
-		String enterKey = "";
+		for (int round = 1; round <= 13; round++) {
 
-		app.drawChart(app.Name, game.getScore(), game.getBonus(), round, game.getFinalDic());
+			String enterKey = "";
 
-		do {
+			app.drawChart(app.Name, game.getScore(), game.getBonus(), round, game.getFinalDic());
 
-			enterKey = app.returnStringFor("Press <<ENTER>> to roll the dice ...");
+			do {
 
-		} while (!enterKey.equals(""));
+				enterKey = app.returnStringFor("Press <<ENTER>> to roll the dice ...");
 
-		int[] dice = game.rolling(5);
+			} while (!enterKey.equals(""));
 
-		int action = 0;
+			int[] dice = game.rolling(5);
 
-		int holdCount = 1;
+			int action = 0;
 
-		do {
+			int holdCount = 1;
+
+			do {
+
+				Arrays.sort(dice);
+
+				System.out.println(String.format("Your rolled:\t|%d|\t|%d|\t|%d|\t|%d|\t|%d|", dice[0], dice[1],
+						dice[2], dice[3], dice[4]));
+
+				action = app.returnIntFor("What action do you like to perform next?"
+						+ "\n(1) Select dice to hold and then re-roll the other dice?" + "\n(2) Re-roll all the dice?"
+						+ "\n(3) Score this round?", 3);
+
+				switch (action) {
+
+				case 1:
+
+					String line = app.returnStringFor("Please enter in the dice position that you want to hold."
+							+ " Please seperate each number with a <<SPACE>>:");
+
+					dice = app.holdSomeDice(line, dice, game);
+
+					holdCount++;
+
+					break;
+
+				case 2:
+
+					dice = game.rolling(5);
+
+					holdCount++;
+
+					break;
+
+				}
+
+			} while (action <= 2 && holdCount < 3);
 
 			Arrays.sort(dice);
 
 			System.out.println(String.format("Your rolled:\t|%d|\t|%d|\t|%d|\t|%d|\t|%d|", dice[0], dice[1], dice[2],
 					dice[3], dice[4]));
 
-			action = app.returnIntFor("What action do you like to perform next?"
-					+ "\n(1) Select dice to hold and then re-roll the other dice?" + "\n(2) Re-roll all the dice?"
-					+ "\n(3) Score this round?", 3);
+			while (true) {
 
-			switch (action) {
+				int ChoosenCat = app.returnIntFor("What category do you want to score this round againts?", 13);
 
-			case 1:
+				boolean isvalid = game.play(dice, ChoosenCat);
 
-				String line = app.returnStringFor("Please enter in the dice position that you want to hold."
-						+ " Please seperate each number with a <<SPACE>>:");
+				if (isvalid) {
+					break;
+				}
 
-				dice = app.holdSomeDice(line, dice, game);
-
-				holdCount++;
-
-				break;
-
-			case 2:
-
-				dice = game.rolling(5);
-
-				holdCount++;
-
-				break;
-
+				else {
+					System.out.println("This category is already scored!");
+				}
 			}
-
-		} while (action <= 2 && holdCount < 3);
-
-		Arrays.sort(dice);
-
-		System.out.println(String.format("Your rolled:\t|%d|\t|%d|\t|%d|\t|%d|\t|%d|", dice[0], dice[1], dice[2],
-				dice[3], dice[4]));
-
-		int ChoosenCat = app.returnIntFor("What category do you want to score this round againts?", 13);
-
+		}
 	}
 
 	public int[] holdSomeDice(String line, int[] dice, Rules game) {
