@@ -179,4 +179,24 @@ public class RulesTest extends TestCase {
 
 	}
 
+	public void testLargeStraight1() {
+
+		int[] Dice = new int[] { 4, 2, 1, 5, 3 };
+
+		ruleClass.play(Dice, 7);
+
+		assertEquals((Integer) 40, ruleClass.getFinalDic().get(box.LargeStraight.name()));
+
+	}
+
+	public void testLargeStraight2() {
+
+		int[] Dice = new int[] { 4, 2, 6, 5, 3 };
+
+		ruleClass.play(Dice, 7);
+
+		assertEquals((Integer) 40, ruleClass.getFinalDic().get(box.LargeStraight.name()));
+
+	}
+
 }
