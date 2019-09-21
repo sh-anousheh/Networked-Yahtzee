@@ -99,7 +99,7 @@ public class RulesTest extends TestCase {
 			sum += i;
 		}
 
-		ruleClass.play(Dice, 15);
+		ruleClass.play(Dice, 10);
 
 		assertEquals((Integer) sum, ruleClass.getFinalDic().get(box.ThreeOfAKind.name()));
 

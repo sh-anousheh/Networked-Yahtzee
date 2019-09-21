@@ -47,9 +47,14 @@ public class Rules {
 	}
 
 	public enum box {
-		Aces, Twos, Threes, Fours, Fives, Sixes, ThreeOfAKind, FourOfAKind, FullHouse, SmallStraight, LargeStraight,
-		Yahtzee, Chance
+		Aces, Twos, Threes, Fours, Fives, Sixes, LargeStraight, SmallStraight, FullHouse, ThreeOfAKind, FourOfAKind,
+		Chance, Yahtzee
 	}
+
+	/*
+	 * public enum box { Aces, Twos, Threes, Fours, Fives, Sixes, ThreeOfAKind,
+	 * FourOfAKind, FullHouse, SmallStraight, LargeStraight, Yahtzee, Chance }
+	 */
 
 	public int[] rolling(int diceNum) {
 
