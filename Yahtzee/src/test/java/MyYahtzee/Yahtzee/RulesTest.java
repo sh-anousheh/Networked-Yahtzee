@@ -158,4 +158,25 @@ public class RulesTest extends TestCase {
 		assertEquals((Integer) 50, ruleClass.getFinalDic().get(box.Yahtzee.name()));
 
 	}
+
+	public void testSmallStraight() {
+
+		int[] Dice = new int[] { 6, 2, 5, 4, 3 };
+
+		ruleClass.play(Dice, 8);
+
+		assertEquals((Integer) 30, ruleClass.getFinalDic().get(box.SmallStraight.name()));
+
+	}
+
+	public void testSmallStraight2() {
+
+		int[] Dice = new int[] { 4, 2, 5, 4, 3 };
+
+		ruleClass.play(Dice, 8);
+
+		assertEquals((Integer) 30, ruleClass.getFinalDic().get(box.SmallStraight.name()));
+
+	}
+
 }
