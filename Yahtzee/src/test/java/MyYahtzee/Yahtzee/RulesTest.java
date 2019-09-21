@@ -53,7 +53,7 @@ public class RulesTest extends TestCase {
 
 		ruleClass.play(new int[] { 1, 2, 6, 4, 1 }, 2);
 
-		assertEquals((Integer) 1, ruleClass.getFinalDic().get(box.Twos.name()));
+		assertEquals((Integer) 2, ruleClass.getFinalDic().get(box.Twos.name()));
 
 	}
 
@@ -61,7 +61,7 @@ public class RulesTest extends TestCase {
 
 		ruleClass.play(new int[] { 3, 2, 3, 3, 3 }, 3);
 
-		assertEquals((Integer) 4, ruleClass.getFinalDic().get(box.Threes.name()));
+		assertEquals((Integer) 12, ruleClass.getFinalDic().get(box.Threes.name()));
 
 	}
 
@@ -69,7 +69,7 @@ public class RulesTest extends TestCase {
 
 		ruleClass.play(new int[] { 4, 2, 4, 3, 3 }, 4);
 
-		assertEquals((Integer) 2, ruleClass.getFinalDic().get(box.Fours.name()));
+		assertEquals((Integer) 8, ruleClass.getFinalDic().get(box.Fours.name()));
 
 	}
 
@@ -77,7 +77,7 @@ public class RulesTest extends TestCase {
 
 		ruleClass.play(new int[] { 4, 5, 5, 5, 3 }, 5);
 
-		assertEquals((Integer) 3, ruleClass.getFinalDic().get(box.Fives.name()));
+		assertEquals((Integer) 15, ruleClass.getFinalDic().get(box.Fives.name()));
 
 	}
 
@@ -85,7 +85,7 @@ public class RulesTest extends TestCase {
 
 		ruleClass.play(new int[] { 6, 5, 5, 6, 3 }, 6);
 
-		assertEquals((Integer) 2, ruleClass.getFinalDic().get(box.Sixes.name()));
+		assertEquals((Integer) 12, ruleClass.getFinalDic().get(box.Sixes.name()));
 
 	}
 
