@@ -114,7 +114,7 @@ public class RulesTest extends TestCase {
 		assertEquals((Integer) 25, ruleClass.getFinalDic().get(box.FullHouse.name()));
 
 	}
-	
+
 	public void testChance() {
 
 		int[] Dice = new int[] { 3, 6, 3, 2, 5 };
@@ -129,6 +129,23 @@ public class RulesTest extends TestCase {
 		ruleClass.play(Dice, 12);
 
 		assertEquals((Integer) sum, ruleClass.getFinalDic().get(box.Chance.name()));
+
+	}
+
+	public void testFourOfAKind() {
+
+		int[] Dice = new int[] { 5, 5, 5, 2, 5 };
+
+		int sum = 0;
+
+		for (int i : Dice) {
+
+			sum += i;
+		}
+
+		ruleClass.play(Dice, 11);
+
+		assertEquals((Integer) sum, ruleClass.getFinalDic().get(box.FourOfAKind.name()));
 
 	}
 
