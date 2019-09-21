@@ -83,6 +83,24 @@ public class Rules {
 		return countDic;
 	}
 
+	public int calculateBonus(Map<String, Integer> scoreDic) {
+
+		int sum = 0;
+
+		for (Integer s : scoreDic.values()) {
+
+			sum += s;
+
+		}
+
+		if (sum > 63) {
+
+			return 35;
+		}
+
+		return 0;
+	}
+
 	public boolean play(int[] dice, int choosen) {
 
 		boolean res = false;
