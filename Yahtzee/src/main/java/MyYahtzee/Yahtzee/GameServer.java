@@ -87,15 +87,37 @@ public class GameServer {
 					System.out.println("The game is starting!");
 
 				}
+
 				while (true) {
-					String chart = dataIn.readUTF();
-					// System.out.println(chart);
-					dataOut.writeUTF(chart);
-					dataOut.flush();
+					if (player1 != null && player2 != null && player3 != null) {
+						if (palayerID == 1) {
+							String chart = dataIn.readUTF();
+							player2.sendchart(chart);
+							player3.sendchart(chart);
+						} else if (palayerID == 2) {
+							String chart = dataIn.readUTF();
+							player1.sendchart(chart);
+							player3.sendchart(chart);
+						} else {
+							String chart = dataIn.readUTF();
+							player2.sendchart(chart);
+							player1.sendchart(chart);
+						}
+					}
 				}
 			} catch (IOException e) {
 				System.out.println("IOException from run() SSC");
 			}
+		}
+
+		public void sendchart(String chart) {
+			try {
+				dataOut.writeUTF(chart);
+				dataOut.flush();
+			} catch (IOException e) {
+				System.out.println("IOException from sendcharts() SSC");
+			}
+
 		}
 	}
 }

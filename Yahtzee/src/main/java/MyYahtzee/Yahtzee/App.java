@@ -42,17 +42,28 @@ public class App {
 
 		app.connectToServer();
 
-		Rules game = new Rules();
+		app.startRecivingInfo();
 
-		int round = 1;
+	}
 
-		do {
-			round++;
-			app.csc.sendToServer(app.Chart(app.name, game.getScore(), game.getBonus(), round, game.getFinalDic()));
-			System.out.println(app.csc.recieveFromServer());
-			app.play(game, round);
-		} while (round <= 13);
+	public void startRecivingInfo() {
+		Thread T = new Thread(new Runnable() {
 
+			public void run() {
+				Rules game = new Rules();
+				int round = 1;
+				while (true) {
+					round++;
+					String chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
+					csc.sendToServer(chart);
+					System.out.println(chart);
+					System.out.println(csc.recieveFromServer());
+					System.out.println(csc.recieveFromServer());
+					play(game, round);
+				}
+			}
+		});
+		T.start();
 	}
 
 	private void connectToServer() {
@@ -73,7 +84,7 @@ public class App {
 				playerID = dataIn.readInt();
 				System.out.println("Welcome player " + playerID + ", please enter your name:");
 				name = reader.readLine();
-				dataOut.writeUTF(name);
+				sendToServer(name);
 
 			} catch (IOException ex) {
 				System.out.println("IO Exception from CSC construction");
@@ -91,25 +102,20 @@ public class App {
 		}
 
 		public String recieveFromServer() {
-			String chart = "";
+			String res = "";
 			try {
-				chart = dataIn.readUTF();
+				res = dataIn.readUTF();
 
 			} catch (IOException e) {
 				System.out.println("IOException from recieveFromServer() CSC");
 			}
-			return chart;
+			return res;
 		}
 	}
 
 	private void play(Rules game, int round) {
 
 		String enterKey = "";
-
-		// csc.sendToServer(Chart(name, game.getScore(), game.getBonus(), round,
-		// game.getFinalDic()));
-		// System.out.println(Chart(name, game.getScore(), game.getBonus(), round,
-		// game.getFinalDic()));
 
 		do {
 
