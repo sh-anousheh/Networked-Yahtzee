@@ -79,16 +79,19 @@ public class GameServer {
 		public void run() {
 			try {
 				dataOut.writeInt(palayerID);
-
 				dataOut.flush();
 
 				String name = dataIn.readUTF();
 				System.out.println(name + " has entered the game lobby!");
 				if (numPlayers == 3) {
 					System.out.println("The game is starting!");
+
 				}
 				while (true) {
-
+					String chart = dataIn.readUTF();
+					// System.out.println(chart);
+					dataOut.writeUTF(chart);
+					dataOut.flush();
 				}
 			} catch (IOException e) {
 				System.out.println("IOException from run() SSC");

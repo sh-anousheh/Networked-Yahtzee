@@ -26,9 +26,11 @@ public class App {
 
 	private int playerID;
 
-	// private int maxTurns;
+	private boolean IsTurn;
 
 	public App() {
+
+		IsTurn = false;
 
 		reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -42,80 +44,15 @@ public class App {
 
 		Rules game = new Rules();
 
-		for (int round = 1; round <= 13; round++) {
+		int round = 1;
 
-			String enterKey = "";
+		do {
+			round++;
+			app.csc.sendToServer(app.Chart(app.name, game.getScore(), game.getBonus(), round, game.getFinalDic()));
+			System.out.println(app.csc.recieveFromServer());
+			app.play(game, round);
+		} while (round <= 13);
 
-			System.out.println(app.Chart(app.name, game.getScore(), game.getBonus(), round, game.getFinalDic()));
-
-			do {
-
-				enterKey = app.returnStringFor("Press <<ENTER>> to roll the dice ...");
-
-			} while (!enterKey.equals(""));
-
-			int[] dice = game.rolling(5);
-
-			int action = 0;
-
-			int holdCount = 1;
-
-			do {
-
-				Arrays.sort(dice);
-
-				System.out.println(String.format("Your rolled:\t|%d|\t|%d|\t|%d|\t|%d|\t|%d|", dice[0], dice[1],
-						dice[2], dice[3], dice[4]));
-
-				action = app.returnIntFor("What action do you like to perform next?"
-						+ "\n(1) Select dice to hold and then re-roll the other dice?" + "\n(2) Re-roll all the dice?"
-						+ "\n(3) Score this round?", 3);
-
-				switch (action) {
-
-				case 1:
-
-					String line = app.returnStringFor("Please enter in the dice position that you want to hold."
-							+ " Please seperate each number with a <<SPACE>>:");
-
-					dice = app.holdSomeDice(line, dice, game);
-
-					holdCount++;
-
-					break;
-
-				case 2:
-
-					dice = game.rolling(5);
-
-					holdCount++;
-
-					break;
-
-				}
-
-			} while (action <= 2 && holdCount < 3);
-
-			Arrays.sort(dice);
-
-			System.out.println(String.format("Your rolled:\t|%d|\t|%d|\t|%d|\t|%d|\t|%d|", dice[0], dice[1], dice[2],
-					dice[3], dice[4]));
-
-			while (true) {
-
-				int ChoosenCat = app.returnIntFor("What category do you want to score this round againts?", 13);
-
-				boolean isvalid = game.play(dice, ChoosenCat);
-
-				if (isvalid) {
-					break;
-				}
-
-				else {
-					System.out.println("This category is already scored!");
-				}
-			}
-		}
 	}
 
 	private void connectToServer() {
@@ -144,14 +81,104 @@ public class App {
 
 		}
 
-		public void sendResult(String res) {
+		public void sendToServer(String res) {
 			try {
 				dataOut.writeUTF(res);
 				dataOut.flush();
 			} catch (IOException e) {
-				System.out.println("IOException from sendResult() CSC");
+				System.out.println("IOException from sendToServer() CSC");
 			}
 		}
+
+		public String recieveFromServer() {
+			String chart = "";
+			try {
+				chart = dataIn.readUTF();
+
+			} catch (IOException e) {
+				System.out.println("IOException from recieveFromServer() CSC");
+			}
+			return chart;
+		}
+	}
+
+	private void play(Rules game, int round) {
+
+		String enterKey = "";
+
+		// csc.sendToServer(Chart(name, game.getScore(), game.getBonus(), round,
+		// game.getFinalDic()));
+		// System.out.println(Chart(name, game.getScore(), game.getBonus(), round,
+		// game.getFinalDic()));
+
+		do {
+
+			enterKey = returnStringFor("Press <<ENTER>> to roll the dice ...");
+
+		} while (!enterKey.equals(""));
+
+		int[] dice = game.rolling(5);
+
+		int action = 0;
+
+		int holdCount = 1;
+
+		do {
+
+			Arrays.sort(dice);
+
+			System.out.println(String.format("Your rolled:\t|%d|\t|%d|\t|%d|\t|%d|\t|%d|", dice[0], dice[1], dice[2],
+					dice[3], dice[4]));
+
+			action = returnIntFor("What action do you like to perform next?"
+					+ "\n(1) Select dice to hold and then re-roll the other dice?" + "\n(2) Re-roll all the dice?"
+					+ "\n(3) Score this round?", 3);
+
+			switch (action) {
+
+			case 1:
+
+				String line = returnStringFor("Please enter in the dice position that you want to hold."
+						+ " Please seperate each number with a <<SPACE>>:");
+
+				dice = holdSomeDice(line, dice, game);
+
+				holdCount++;
+
+				break;
+
+			case 2:
+
+				dice = game.rolling(5);
+
+				holdCount++;
+
+				break;
+
+			}
+
+		} while (action <= 2 && holdCount < 3);
+
+		Arrays.sort(dice);
+
+		System.out.println(String.format("Your rolled:\t|%d|\t|%d|\t|%d|\t|%d|\t|%d|", dice[0], dice[1], dice[2],
+				dice[3], dice[4]));
+
+		while (true) {
+
+			int ChoosenCat = returnIntFor("What category do you want to score this round againts?", 13);
+
+			boolean isvalid = game.play(dice, ChoosenCat);
+
+			if (isvalid) {
+				break;
+			}
+
+			else {
+				System.out.println("This category is already scored!");
+			}
+		}
+
 	}
 
 	public int[] holdSomeDice(String line, int[] dice, Rules game) {
