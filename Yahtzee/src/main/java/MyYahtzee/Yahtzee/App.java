@@ -8,21 +8,37 @@ import java.util.Arrays;
 import java.util.Map;
 
 import MyYahtzee.Yahtzee.Rules.box;
+import javax.swing.*;
+import java.awt.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.awt.event.*;
 
 public class App {
 
 	private BufferedReader reader;
 
-	private String Name = "Anousheh";
+	private String name;
+
+	private ClientSideConnection csc;
+
+	private int playerID;
+
+	// private int maxTurns;
 
 	public App() {
 
 		reader = new BufferedReader(new InputStreamReader(System.in));
+
 	}
 
 	public static void main(String[] args) {
 
 		App app = new App();
+
+		app.connectToServer();
 
 		Rules game = new Rules();
 
@@ -30,7 +46,7 @@ public class App {
 
 			String enterKey = "";
 
-			app.drawChart(app.Name, game.getScore(), game.getBonus(), round, game.getFinalDic());
+			System.out.println(app.Chart(app.name, game.getScore(), game.getBonus(), round, game.getFinalDic()));
 
 			do {
 
@@ -102,6 +118,42 @@ public class App {
 		}
 	}
 
+	private void connectToServer() {
+		csc = new ClientSideConnection();
+	}
+
+	private class ClientSideConnection {
+
+		private Socket socket;
+		private DataInputStream dataIn;
+		private DataOutputStream dataOut;
+
+		public ClientSideConnection() {
+			try {
+				socket = new Socket("localhost", 51734);
+				dataIn = new DataInputStream(socket.getInputStream());
+				dataOut = new DataOutputStream(socket.getOutputStream());
+				playerID = dataIn.readInt();
+				System.out.println("Welcome player " + playerID + ", please enter your name:");
+				name = reader.readLine();
+				dataOut.writeUTF(name);
+
+			} catch (IOException ex) {
+				System.out.println("IO Exception from CSC construction");
+			}
+
+		}
+
+		public void sendResult(String res) {
+			try {
+				dataOut.writeUTF(res);
+				dataOut.flush();
+			} catch (IOException e) {
+				System.out.println("IOException from sendResult() CSC");
+			}
+		}
+	}
+
 	public int[] holdSomeDice(String line, int[] dice, Rules game) {
 
 		String[] position = line.split(" ");
@@ -167,49 +219,29 @@ public class App {
 		return res;
 	}
 
-	public void drawChart(String name, int score, int bonus, int round, Map<String, Integer> lastDic) {
+	public String Chart(String name, int score, int bonus, int round, Map<String, Integer> lastDic) {
 
-		System.out.println(
-				"_________________________________________________________________________________________________");
-
-		System.out.println(
-				String.format("| Name: %s\t\t| Current Score: %d\t\t| Current Round: %d\t\t|", name, score, round));
-
-		System.out.println(
-				"|_______________________________|_______________________________|_______________________________|");
-
-		System.out.println(String.format("| (1) Ones: %d\t\t| (2) Twoes: %d\t\t| (3) Threes: %d\t\t|",
-				lastDic.get(box.Aces.name()), lastDic.get(box.Twos.name()), lastDic.get(box.Threes.name())));
-
-		System.out.println(
-				"|_______________________________|_______________________________|_______________________________|");
-
-		System.out.println(String.format("| (4) Fours: %d\t\t| (5) Fives: %d\t\t| (6) Sixes: %d\t\t|",
-				lastDic.get(box.Fours.name()), lastDic.get(box.Fives.name()), lastDic.get(box.Sixes.name())));
-
-		System.out.println(
-				"|_______________________________|_______________________________|_______________________________|");
-
-		System.out.println(String.format("| Bonus: %d\t\t\t| (7) Large Straight: %d\t| (8) Small Straight: %d\t|",
-				bonus, lastDic.get(box.LargeStraight.name()), lastDic.get(box.SmallStraight.name())));
-
-		System.out.println(
-				"|_______________________________|_______________________________|_______________________________|");
-
-		System.out.println(
-				String.format("| (9) Full House: %d\t\t| (10) Three of a Kind: %d\t| (11) Four of a Kind: %d\t|",
+		String res = "\n_________________________________________________________________________________________________"
+				+ String.format("\n| Name: %s\t\t| Current Score: %d\t\t| Current Round: %d\t\t|", name, score, round)
+				+ "\n|_______________________________|_______________________________|_______________________________|"
+				+ String.format("\n| (1) Ones: %d\t\t| (2) Twoes: %d\t\t| (3) Threes: %d\t\t|",
+						lastDic.get(box.Aces.name()), lastDic.get(box.Twos.name()), lastDic.get(box.Threes.name()))
+				+ "\n|_______________________________|_______________________________|_______________________________|"
+				+ String.format("\n| (4) Fours: %d\t\t| (5) Fives: %d\t\t| (6) Sixes: %d\t\t|",
+						lastDic.get(box.Fours.name()), lastDic.get(box.Fives.name()), lastDic.get(box.Sixes.name()))
+				+ "\n|_______________________________|_______________________________|_______________________________|"
+				+ String.format("\n| Bonus: %d\t\t\t| (7) Large Straight: %d\t| (8) Small Straight: %d\t|", bonus,
+						lastDic.get(box.LargeStraight.name()), lastDic.get(box.SmallStraight.name()))
+				+ "\n|_______________________________|_______________________________|_______________________________|"
+				+ String.format("\n| (9) Full House: %d\t\t| (10) Three of a Kind: %d\t| (11) Four of a Kind: %d\t|",
 						lastDic.get(box.FullHouse.name()), lastDic.get(box.ThreeOfAKind.name()),
-						lastDic.get(box.FourOfAKind.name())));
+						lastDic.get(box.FourOfAKind.name()))
+				+ "\n|_______________________________|_______________________________|_______________________________|"
+				+ String.format("\n| (12) Chance: %d\t\t| (13) Yahtzee: %d\t\t| \t\t\t\t|",
+						lastDic.get(box.Chance.name()), lastDic.get(box.Yahtzee.name()))
+				+ "\n|_______________________________|_______________________________|_______________________________|";
 
-		System.out.println(
-				"|_______________________________|_______________________________|_______________________________|");
-
-		System.out.println(String.format("| (12) Chance: %d\t\t| (13) Yahtzee: %d\t\t| \t\t\t\t|",
-				lastDic.get(box.Chance.name()), lastDic.get(box.Yahtzee.name())));
-
-		System.out.println(
-				"|_______________________________|_______________________________|_______________________________|");
-
+		return res;
 	}
 
 }
