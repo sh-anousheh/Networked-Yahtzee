@@ -199,7 +199,7 @@ public class Rules {
 
 				initDic.replace(box.SmallStraight.name(), 30);
 
-				if (numCount.get(5) == 1) {
+				if (numCount.get(5) > 0) {
 
 					initDic.replace(box.LargeStraight.name(), 40);
 				}
@@ -209,7 +209,18 @@ public class Rules {
 
 				initDic.replace(box.SmallStraight.name(), 30);
 
-				if (numCount.get(6) == 1) {
+				if (numCount.get(6) > 0) {
+
+					initDic.replace(box.LargeStraight.name(), 40);
+				}
+
+			}
+
+			else if (numCount.get(3) > 0 && numCount.get(4) > 0 && numCount.get(5) > 0 && numCount.get(6) > 0) {
+
+				initDic.replace(box.SmallStraight.name(), 30);
+
+				if (numCount.get(2) > 0) {
 
 					initDic.replace(box.LargeStraight.name(), 40);
 				}
