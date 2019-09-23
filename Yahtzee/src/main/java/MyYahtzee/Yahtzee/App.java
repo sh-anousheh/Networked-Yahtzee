@@ -1,20 +1,15 @@
 package MyYahtzee.Yahtzee;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Map;
 
 import MyYahtzee.Yahtzee.Rules.box;
-import javax.swing.*;
-import java.awt.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.net.Socket;
-import java.awt.event.*;
 
 public class App {
 
@@ -68,7 +63,7 @@ public class App {
 
 					System.out.println(csc.recieveFromServer());
 
-					if (turn ==  playerID) {
+					if (turn == playerID) {
 
 						play(game, round);
 

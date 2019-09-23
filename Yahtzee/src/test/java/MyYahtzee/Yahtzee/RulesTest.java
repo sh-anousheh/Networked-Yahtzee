@@ -180,6 +180,26 @@ public class RulesTest extends TestCase {
 
 	}
 
+	public void testSmallStraight3() {
+
+		int[] Dice = new int[] { 4, 6, 5, 4, 3 };
+
+		ruleClass.play(Dice, 8);
+
+		assertEquals((Integer) 30, ruleClass.getFinalDic().get(box.SmallStraight.name()));
+
+	}
+
+	public void testSmallStraight4() {
+
+		int[] Dice = new int[] { 2, 1, 1, 4, 3 };
+
+		ruleClass.play(Dice, 8);
+
+		assertEquals((Integer) 30, ruleClass.getFinalDic().get(box.SmallStraight.name()));
+
+	}
+
 	public void testLargeStraight1() {
 
 		int[] Dice = new int[] { 4, 2, 1, 5, 3 };

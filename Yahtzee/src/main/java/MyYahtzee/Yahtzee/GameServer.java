@@ -15,19 +15,11 @@ public class GameServer {
 
 	private ServerSideConnection player3;
 
-	private int turnsMade;
-
-	private int maxTurns;
-
 	public GameServer() {
 
 		System.out.println("Yahtzee Game Engine has been starting.");
 
 		numPlayers = 0;
-
-		turnsMade = 0;
-
-		maxTurns = 4;
 
 		try {
 
