@@ -26,11 +26,7 @@ public class App {
 
 	private int playerID;
 
-	private boolean IsTurn;
-
 	public App() {
-
-		IsTurn = false;
 
 		reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -47,19 +43,47 @@ public class App {
 	}
 
 	public void startRecivingInfo() {
+
 		Thread T = new Thread(new Runnable() {
 
 			public void run() {
+
 				Rules game = new Rules();
+
 				int round = 1;
+
+				int turn = 1;
+
 				while (true) {
-					round++;
+
 					String chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
+
 					csc.sendToServer(chart);
+
 					System.out.println(chart);
+
 					System.out.println(csc.recieveFromServer());
+
 					System.out.println(csc.recieveFromServer());
-					play(game, round);
+
+					if (turn == playerID) {
+
+						play(game, round);
+
+						round++;
+
+						turn++;
+
+						if (turn == 4) {
+
+							turn = 1;
+						}
+
+						csc.sendToServer(String.valueOf(turn));
+
+					}
+
+					turn = Integer.parseInt(csc.recieveFromServer());
 				}
 			}
 		});
@@ -67,48 +91,70 @@ public class App {
 	}
 
 	private void connectToServer() {
+
 		csc = new ClientSideConnection();
 	}
 
 	private class ClientSideConnection {
 
 		private Socket socket;
+
 		private DataInputStream dataIn;
+
 		private DataOutputStream dataOut;
 
 		public ClientSideConnection() {
+
 			try {
+
 				socket = new Socket("localhost", 51734);
+
 				dataIn = new DataInputStream(socket.getInputStream());
+
 				dataOut = new DataOutputStream(socket.getOutputStream());
+
 				playerID = dataIn.readInt();
+
 				System.out.println("Welcome player " + playerID + ", please enter your name:");
+
 				name = reader.readLine();
+
 				sendToServer(name);
 
 			} catch (IOException ex) {
+
 				System.out.println("IO Exception from CSC construction");
 			}
 
 		}
 
 		public void sendToServer(String res) {
+
 			try {
+
 				dataOut.writeUTF(res);
+
 				dataOut.flush();
+
 			} catch (IOException e) {
+
 				System.out.println("IOException from sendToServer() CSC");
 			}
 		}
 
 		public String recieveFromServer() {
+
 			String res = "";
+
 			try {
+
 				res = dataIn.readUTF();
 
 			} catch (IOException e) {
+
 				System.out.println("IOException from recieveFromServer() CSC");
 			}
+
 			return res;
 		}
 	}
