@@ -124,7 +124,9 @@ public class GameServer {
 
 				dataOut.flush();
 
-				String name = dataIn.readUTF();
+				String name = "";
+
+				name = dataIn.readUTF();
 
 				System.out.println(name + " has entered the game lobby!");
 
@@ -156,7 +158,18 @@ public class GameServer {
 
 						player3.sendToClient(chart2);
 
-						turn = dataIn.readUTF();
+						if (Integer.parseInt(turn) == 1) {
+
+							turn = player1.dataIn.readUTF();
+
+						} else if (Integer.parseInt(turn) == 2) {
+
+							turn = player2.dataIn.readUTF();
+
+						} else {
+
+							turn = player3.dataIn.readUTF();
+						}
 
 						player1.sendToClient(turn);
 

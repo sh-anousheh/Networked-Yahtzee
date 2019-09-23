@@ -28,6 +28,8 @@ public class App {
 
 	public App() {
 
+		name = "";
+
 		reader = new BufferedReader(new InputStreamReader(System.in));
 
 	}
@@ -66,7 +68,7 @@ public class App {
 
 					System.out.println(csc.recieveFromServer());
 
-					if (turn == playerID) {
+					if (turn ==  playerID) {
 
 						play(game, round);
 
