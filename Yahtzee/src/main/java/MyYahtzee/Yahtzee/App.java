@@ -23,8 +23,6 @@ public class App {
 
 	public App() {
 
-		name = "";
-
 		reader = new BufferedReader(new InputStreamReader(System.in));
 
 	}
@@ -65,18 +63,32 @@ public class App {
 
 					if (turn == playerID) {
 
-						play(game, round);
+						if (round < 14) {
 
-						round++;
+							round++;
 
-						turn++;
+							play(game, round);
 
-						if (turn == 4) {
+							turn++;
 
-							turn = 1;
+							if (turn == 4) {
+
+								csc.sendToServer(String.valueOf(false));
+
+								turn = 1;
+							}
+
+							csc.sendToServer(String.valueOf(turn));
+
+						} else {
+
+							csc.sendToServer(String.valueOf(true));
+
+							csc.sendToServer(String.valueOf(game.getScore()));
+
+							System.out.println(csc.recieveFromServer());
+
 						}
-
-						csc.sendToServer(String.valueOf(turn));
 
 					}
 

@@ -188,7 +188,6 @@ public class Rules {
 					else {
 
 						initDic.replace(box.Yahtzee.name(), initDic.get(box.Yahtzee.name() + 100));
-
 					}
 
 				}

@@ -88,6 +88,8 @@ public class GameServer {
 
 		private String turn;
 
+		private String name = "";
+
 		ServerSideConnection(Socket s, int id) {
 
 			socket = s;
@@ -116,8 +118,6 @@ public class GameServer {
 
 				dataOut.flush();
 
-				String name = "";
-
 				name = dataIn.readUTF();
 
 				System.out.println(name + " has entered the game lobby!");
@@ -128,7 +128,9 @@ public class GameServer {
 
 				}
 
-				while (true) {
+				Boolean IsEnd = false;
+
+				while (!IsEnd) {
 
 					if (player1 != null && player2 != null && player3 != null) {
 
@@ -160,7 +162,10 @@ public class GameServer {
 
 						} else {
 
+							IsEnd = Boolean.valueOf(player3.dataIn.readUTF());
+
 							turn = player3.dataIn.readUTF();
+
 						}
 
 						player1.sendToClient(turn);
@@ -171,6 +176,33 @@ public class GameServer {
 
 					}
 				}
+
+				int score1 = Integer.parseInt(player1.dataIn.readUTF());
+
+				int score2 = Integer.parseInt(player1.dataIn.readUTF());
+
+				int score3 = Integer.parseInt(player1.dataIn.readUTF());
+
+				String res = "";
+
+				if (score1 > score2 && score1 > score3) {
+					res = "congratulations, " + player1.name + " has won the game with a score of " + score1
+							+ " points";
+				} else if (score2 > score1 && score2 > score3) {
+					res = "congratulations, " + player2.name + " has won the game with a score of " + score1
+							+ " points";
+				} else {
+					res = "congratulations, " + player3.name + " has won the game with a score of " + score1
+							+ " points";
+				}
+
+				res += "\nGreat game everyone, and thanks for playing. Goodbye.";
+
+				player1.sendToClient(res);
+
+				player1.sendToClient(res);
+
+				player1.sendToClient(res);
 
 			} catch (IOException e) {
 
