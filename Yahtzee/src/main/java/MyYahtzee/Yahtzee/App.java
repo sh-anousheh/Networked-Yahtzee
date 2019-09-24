@@ -1,6 +1,7 @@
 package MyYahtzee.Yahtzee;
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -15,6 +16,8 @@ public class App {
 
 	private BufferedReader reader;
 
+	private int maxRound;
+
 	private String name;
 
 	private ClientSideConnection csc;
@@ -22,6 +25,8 @@ public class App {
 	private int playerID;
 
 	public App() {
+
+		maxRound = 1;// 13
 
 		reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -49,51 +54,82 @@ public class App {
 
 				int turn = 1;
 
+				boolean conti = true;
+
 				while (true) {
 
-					String chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
+					String chart = "";
 
-					csc.sendToServer(chart);
+					if (conti) {
 
-					System.out.println(chart);
+						chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
 
-					System.out.println(csc.recieveFromServer());
+						csc.sendToServer(chart);
 
-					System.out.println(csc.recieveFromServer());
+						System.out.println(chart);
 
-					if (turn == playerID) {
+						System.out.println(csc.recieveFromServer());
 
-						if (round < 14) {
+						System.out.println(csc.recieveFromServer());
 
-							round++;
+						if (turn == playerID) {
 
-							play(game, round);
+							if (round < maxRound) {
 
-							turn++;
+								round++;
 
-							if (turn == 4) {
+								play(game, round);
 
-								csc.sendToServer(String.valueOf(false));
+								turn++;
 
-								turn = 1;
+								if (turn == 4) {
+
+									turn = 1;
+								}
+
+								csc.sendToServer(String.valueOf(conti));
+
+								csc.sendToServer(String.valueOf(turn));
+
+							} else if (round == maxRound) {
+								round++;
+
+								play(game, round);
+
+								turn++;
+
+								if (turn == 4) {
+
+									turn = 1;
+								}
+
+								conti = false;
+
+								csc.sendToServer(String.valueOf(conti));
+
+								csc.sendToServer(String.valueOf(turn));
+
 							}
-
-							csc.sendToServer(String.valueOf(turn));
-
-						} else {
-
-							csc.sendToServer(String.valueOf(true));
-
-							csc.sendToServer(String.valueOf(game.getScore()));
-
-							System.out.println(csc.recieveFromServer());
 
 						}
 
+						turn = Integer.parseInt(csc.recieveFromServer());
+
 					}
 
-					turn = Integer.parseInt(csc.recieveFromServer());
+					else {
+
+						// csc.sendToServer(chart);
+						// System.out.println("Send to server" + String.valueOf(game.getScore()));
+
+						csc.sendToServer(String.valueOf(game.getScore()));
+
+						// System.out.println(csc.recieveFromServer());
+
+					}
+
 				}
+
 			}
 		});
 		T.start();

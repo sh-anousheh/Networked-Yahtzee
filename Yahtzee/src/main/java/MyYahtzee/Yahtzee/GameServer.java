@@ -88,9 +88,11 @@ public class GameServer {
 
 		private String turn;
 
-		private String name = "";
+		private String name;
 
 		ServerSideConnection(Socket s, int id) {
+
+			name = "";
 
 			socket = s;
 
@@ -125,14 +127,19 @@ public class GameServer {
 				if (numPlayers == 3) {
 
 					System.out.println("The game is starting!");
-
 				}
 
-				Boolean IsEnd = false;
+				Boolean conti1 = true;
 
-				while (!IsEnd) {
+				Boolean conti2 = true;
 
-					if (player1 != null && player2 != null && player3 != null) {
+				Boolean conti3 = true;
+
+				while (true) {
+
+					if (player1 != null && player2 != null && player3 != null)
+
+					{
 
 						String chart1 = player1.dataIn.readUTF();
 
@@ -154,55 +161,68 @@ public class GameServer {
 
 						if (Integer.parseInt(turn) == 1) {
 
+							conti1 = Boolean.valueOf(player1.dataIn.readUTF());
+
 							turn = player1.dataIn.readUTF();
 
 						} else if (Integer.parseInt(turn) == 2) {
+
+							conti2 = Boolean.valueOf(player2.dataIn.readUTF());
 
 							turn = player2.dataIn.readUTF();
 
 						} else {
 
-							IsEnd = Boolean.valueOf(player3.dataIn.readUTF());
+							conti3 = Boolean.valueOf(player3.dataIn.readUTF());
 
 							turn = player3.dataIn.readUTF();
-
 						}
-
+						// if (conti1)
 						player1.sendToClient(turn);
 
+						// if (conti2)
 						player2.sendToClient(turn);
 
+						// if (conti3)
 						player3.sendToClient(turn);
 
+						if (!conti1 && !conti2 && !conti3) {
+
+							System.out.println("tamoooom");
+
+							int score1 = Integer.parseInt(player1.dataIn.readUTF());
+
+							int score2 = Integer.parseInt(player2.dataIn.readUTF());
+
+							int score3 = Integer.parseInt(player3.dataIn.readUTF());
+
+							String res = "";
+
+							if (score1 >= score2 && score1 >= score3) {
+								res = "congratulations, " + player1.name + " has won the game with a score of " + score1
+										+ " points";
+							} else if (score2 >= score1 && score2 >= score3) {
+								res = "congratulations, " + player2.name + " has won the game with a score of " + score2
+										+ " points";
+							} else {
+								res = "congratulations, " + player3.name + " has won the game with a score of " + score3
+										+ " points";
+							}
+
+							res += "\nGreat game everyone, and thanks for playing. Goodbye.";
+
+							player1.sendToClient(res);
+
+							player2.sendToClient(res);
+
+							player3.sendToClient(res);
+
+							System.out.println(res);
+
+							break;
+						}
 					}
 				}
-
-				int score1 = Integer.parseInt(player1.dataIn.readUTF());
-
-				int score2 = Integer.parseInt(player1.dataIn.readUTF());
-
-				int score3 = Integer.parseInt(player1.dataIn.readUTF());
-
-				String res = "";
-
-				if (score1 > score2 && score1 > score3) {
-					res = "congratulations, " + player1.name + " has won the game with a score of " + score1
-							+ " points";
-				} else if (score2 > score1 && score2 > score3) {
-					res = "congratulations, " + player2.name + " has won the game with a score of " + score1
-							+ " points";
-				} else {
-					res = "congratulations, " + player3.name + " has won the game with a score of " + score1
-							+ " points";
-				}
-
-				res += "\nGreat game everyone, and thanks for playing. Goodbye.";
-
-				player1.sendToClient(res);
-
-				player1.sendToClient(res);
-
-				player1.sendToClient(res);
 
 			} catch (IOException e) {
 
