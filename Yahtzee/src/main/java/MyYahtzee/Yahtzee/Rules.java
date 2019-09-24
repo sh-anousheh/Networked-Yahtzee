@@ -115,15 +115,19 @@ public class Rules {
 
 			if (b.ordinal() + 1 == choosen) {
 
-				finalDic.put(b.name(), initDic.get(b.name()));
+				if (initDic.containsKey(b.name())) {
 
-				score +=
+					finalDic.put(b.name(), initDic.get(b.name()));
 
-						initDic.remove(b.name());
+					score +=
 
-				return true;
+							initDic.remove(b.name());
+
+					return true;
+				}
 			}
 		}
+
 		return res;
 
 	}
