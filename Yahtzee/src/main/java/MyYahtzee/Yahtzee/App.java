@@ -1,7 +1,6 @@
 package MyYahtzee.Yahtzee;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -26,7 +25,7 @@ public class App {
 
 	public App() {
 
-		maxRound = 1;// 13
+		maxRound = 13;
 
 		reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -91,6 +90,8 @@ public class App {
 
 								csc.sendToServer(String.valueOf(turn));
 
+								csc.sendToServer("Player " + playerID + " has completed the game.");
+
 							} else if (round == maxRound) {
 								round++;
 
@@ -108,6 +109,8 @@ public class App {
 								csc.sendToServer(String.valueOf(conti));
 
 								csc.sendToServer(String.valueOf(turn));
+
+								csc.sendToServer("Player " + playerID + " has completed the game.");
 
 							}
 

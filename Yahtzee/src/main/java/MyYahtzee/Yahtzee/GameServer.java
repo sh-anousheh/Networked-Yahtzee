@@ -126,7 +126,7 @@ public class GameServer {
 
 				if (numPlayers == 3) {
 
-					System.out.println("The game is starting!");
+					System.out.println("\nThe game is starting!\n");
 				}
 
 				Boolean conti1 = true;
@@ -165,30 +165,34 @@ public class GameServer {
 
 							turn = player1.dataIn.readUTF();
 
+							System.out.println(player1.dataIn.readUTF());
+
 						} else if (Integer.parseInt(turn) == 2) {
 
 							conti2 = Boolean.valueOf(player2.dataIn.readUTF());
 
 							turn = player2.dataIn.readUTF();
 
+							System.out.println(player2.dataIn.readUTF());
+
 						} else {
 
 							conti3 = Boolean.valueOf(player3.dataIn.readUTF());
 
 							turn = player3.dataIn.readUTF();
+
+							System.out.println(player3.dataIn.readUTF() + "\n");
 						}
-						// if (conti1)
+
 						player1.sendToClient(turn);
 
-						// if (conti2)
 						player2.sendToClient(turn);
 
-						// if (conti3)
 						player3.sendToClient(turn);
 
 						if (!conti1 && !conti2 && !conti3) {
 
-							System.out.println("tamoooom");
+							System.out.println("\nGame Compplete.");
 
 							int score1 = Integer.parseInt(player1.dataIn.readUTF());
 
@@ -199,14 +203,14 @@ public class GameServer {
 							String res = "";
 
 							if (score1 >= score2 && score1 >= score3) {
-								res = "congratulations, " + player1.name + " has won the game with a score of " + score1
-										+ " points";
+								res = "\ncongratulations, " + player1.name + " has won the game with a score of "
+										+ score1 + " points";
 							} else if (score2 >= score1 && score2 >= score3) {
-								res = "congratulations, " + player2.name + " has won the game with a score of " + score2
-										+ " points";
+								res = "\ncongratulations, " + player2.name + " has won the game with a score of "
+										+ score2 + " points";
 							} else {
-								res = "congratulations, " + player3.name + " has won the game with a score of " + score3
-										+ " points";
+								res = "\ncongratulations, " + player3.name + " has won the game with a score of "
+										+ score3 + " points";
 							}
 
 							res += "\nGreat game everyone, and thanks for playing. Goodbye.";
