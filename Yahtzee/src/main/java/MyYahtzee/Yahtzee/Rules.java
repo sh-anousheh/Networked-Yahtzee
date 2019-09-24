@@ -10,8 +10,6 @@ public class Rules {
 
 	private Map<String, Integer> finalDic;
 
-	private int bonus;
-
 	private int score;
 
 	public int getBonus() {
@@ -33,8 +31,6 @@ public class Rules {
 	public Rules() {
 
 		score = 0;
-
-		bonus = 0;
 
 		initDic = new HashMap<String, Integer>();
 

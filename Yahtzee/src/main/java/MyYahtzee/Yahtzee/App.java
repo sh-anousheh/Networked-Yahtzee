@@ -61,7 +61,7 @@ public class App {
 
 					if (conti) {
 
-						chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
+						chart = Chart(name, game.getScore(), game.getBonus(), game.getBonus(), game.getFinalDic());
 
 						csc.sendToServer(chart);
 
