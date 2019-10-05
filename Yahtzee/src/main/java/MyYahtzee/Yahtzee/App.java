@@ -112,9 +112,9 @@ public class App {
 
 					else {
 
-						if (turn == 2) {
+						readnWriteChart(name, game, round);
 
-							readnWriteChart(name, game, round);
+						if (turn == 2) {
 
 							turn = Integer.parseInt(csc.recieveFromServer());
 
@@ -126,15 +126,10 @@ public class App {
 
 						} else if (turn == 3) {
 
-							readnWriteChart(name, game, round);
-
 							turn = Integer.parseInt(csc.recieveFromServer());
 
 							readnWriteChart(name, game, round);
 
-						} else {
-
-							readnWriteChart(name, game, round);
 						}
 
 						csc.sendToServer(String.valueOf(game.getScore()));
