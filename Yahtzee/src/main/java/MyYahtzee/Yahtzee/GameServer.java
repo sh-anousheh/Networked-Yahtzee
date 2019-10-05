@@ -141,23 +141,7 @@ public class GameServer {
 
 					{
 
-						String chart1 = player1.dataIn.readUTF();
-
-						String chart2 = player2.dataIn.readUTF();
-
-						String chart3 = player3.dataIn.readUTF();
-
-						player1.sendToClient(chart2);
-
-						player1.sendToClient(chart3);
-
-						player2.sendToClient(chart1);
-
-						player2.sendToClient(chart3);
-
-						player3.sendToClient(chart1);
-
-						player3.sendToClient(chart2);
+						readnWriteCharts();
 
 						if (Integer.parseInt(turn) == 1) {
 
@@ -191,24 +175,9 @@ public class GameServer {
 						player3.sendToClient(turn);
 
 						if (!conti1 && !conti2 && !conti3) {
-							chart1 = player1.dataIn.readUTF();
 
-							chart2 = player2.dataIn.readUTF();
+							readnWriteCharts();
 
-							chart3 = player3.dataIn.readUTF();
-							player1.sendToClient(chart2);
-
-							player1.sendToClient(chart3);
-
-							player2.sendToClient(chart1);
-
-							player2.sendToClient(chart3);
-
-							player3.sendToClient(chart1);
-
-							player3.sendToClient(chart2);
-
-							// -------------------------------
 							System.out.println("\nGame Compplete.");
 
 							int score1 = Integer.parseInt(player1.dataIn.readUTF());
@@ -249,6 +218,33 @@ public class GameServer {
 
 				System.out.println("IOException from run() SSC");
 			}
+		}
+
+		public void readnWriteCharts() {
+			try {
+
+				String chart1 = player1.dataIn.readUTF();
+
+				String chart2 = player2.dataIn.readUTF();
+
+				String chart3 = player3.dataIn.readUTF();
+
+				player1.sendToClient(chart2);
+
+				player1.sendToClient(chart3);
+
+				player2.sendToClient(chart1);
+
+				player2.sendToClient(chart3);
+
+				player3.sendToClient(chart1);
+
+				player3.sendToClient(chart2);
+
+			} catch (IOException ex) {
+
+			}
+
 		}
 
 		public void sendToClient(String chart) {
