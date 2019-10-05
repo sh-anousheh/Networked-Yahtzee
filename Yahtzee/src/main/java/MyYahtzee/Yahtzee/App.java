@@ -25,7 +25,7 @@ public class App {
 
 	public App() {
 
-		maxRound = 1;// 13;
+		maxRound = 13;
 
 		reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -83,6 +83,7 @@ public class App {
 								csc.sendToServer("Player " + playerID + " has completed the game.");
 
 							} else if (round == maxRound) {
+
 								round++;
 
 								play(game, round);
