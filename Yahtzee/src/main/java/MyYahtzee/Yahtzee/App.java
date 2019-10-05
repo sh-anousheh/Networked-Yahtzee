@@ -25,7 +25,7 @@ public class App {
 
 	public App() {
 
-		maxRound = 13;
+		maxRound = 1;// 13;
 
 		reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -58,9 +58,7 @@ public class App {
 				while (true) {
 
 					String chart = "";
-
 					if (conti) {
-
 						chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
 
 						csc.sendToServer(chart);
@@ -122,12 +120,70 @@ public class App {
 
 					else {
 
-						// csc.sendToServer(chart);
-						// System.out.println("Send to server" + String.valueOf(game.getScore()));
+						if (turn == 2) {
+
+							chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
+
+							csc.sendToServer(chart);
+
+							System.out.println(chart);
+
+							System.out.println(csc.recieveFromServer());
+
+							System.out.println(csc.recieveFromServer());
+							turn = Integer.parseInt(csc.recieveFromServer());
+							// -----------------------------------------------------------
+							csc.sendToServer(chart);
+
+							System.out.println(chart);
+
+							System.out.println(csc.recieveFromServer());
+
+							System.out.println(csc.recieveFromServer());
+							turn = Integer.parseInt(csc.recieveFromServer());
+							// -----------------------------------------------------------
+							csc.sendToServer(chart);
+
+							System.out.println(chart);
+
+							System.out.println(csc.recieveFromServer());
+
+							System.out.println(csc.recieveFromServer());
+
+						} else if (turn == 3) {
+							chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
+
+							csc.sendToServer(chart);
+
+							System.out.println(chart);
+
+							System.out.println(csc.recieveFromServer());
+
+							System.out.println(csc.recieveFromServer());
+							turn = Integer.parseInt(csc.recieveFromServer());
+							// -----------------------------------------------------------
+							csc.sendToServer(chart);
+
+							System.out.println(chart);
+
+							System.out.println(csc.recieveFromServer());
+
+							System.out.println(csc.recieveFromServer());
+
+						} else {
+							chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
+
+							csc.sendToServer(chart);
+
+							System.out.println(chart);
+
+							System.out.println(csc.recieveFromServer());
+
+							System.out.println(csc.recieveFromServer());
+
+						}
 
 						csc.sendToServer(String.valueOf(game.getScore()));
-
-						// System.out.println(csc.recieveFromServer());
 
 					}
 
