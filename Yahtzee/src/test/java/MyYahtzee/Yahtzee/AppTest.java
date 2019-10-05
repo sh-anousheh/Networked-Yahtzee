@@ -47,19 +47,6 @@ public class AppTest extends TestCase {
 
 		boolean pass = true;
 
-		/*
-		 * for (int i = 0; i < 5; i++) {
-		 * 
-		 * System.out.print(dice[i]); }
-		 * 
-		 * System.out.println();
-		 * 
-		 * for (int i = 0; i < 5; i++) {
-		 * 
-		 * System.out.print(newDice[i]); }
-		 * 
-		 * System.out.println(holds.toString());
-		 */
 		int i = 0;
 
 		for (Object o : holds) {
