@@ -57,17 +57,9 @@ public class App {
 
 				while (true) {
 
-					String chart = "";
 					if (conti) {
-						chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
 
-						csc.sendToServer(chart);
-
-						System.out.println(chart);
-
-						System.out.println(csc.recieveFromServer());
-
-						System.out.println(csc.recieveFromServer());
+						readnWriteChart(name, game, round);
 
 						if (turn == playerID) {
 
@@ -122,65 +114,27 @@ public class App {
 
 						if (turn == 2) {
 
-							chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
+							readnWriteChart(name, game, round);
 
-							csc.sendToServer(chart);
-
-							System.out.println(chart);
-
-							System.out.println(csc.recieveFromServer());
-
-							System.out.println(csc.recieveFromServer());
 							turn = Integer.parseInt(csc.recieveFromServer());
-							// -----------------------------------------------------------
-							csc.sendToServer(chart);
 
-							System.out.println(chart);
+							readnWriteChart(name, game, round);
 
-							System.out.println(csc.recieveFromServer());
-
-							System.out.println(csc.recieveFromServer());
 							turn = Integer.parseInt(csc.recieveFromServer());
-							// -----------------------------------------------------------
-							csc.sendToServer(chart);
 
-							System.out.println(chart);
-
-							System.out.println(csc.recieveFromServer());
-
-							System.out.println(csc.recieveFromServer());
+							readnWriteChart(name, game, round);
 
 						} else if (turn == 3) {
-							chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
 
-							csc.sendToServer(chart);
+							readnWriteChart(name, game, round);
 
-							System.out.println(chart);
-
-							System.out.println(csc.recieveFromServer());
-
-							System.out.println(csc.recieveFromServer());
 							turn = Integer.parseInt(csc.recieveFromServer());
-							// -----------------------------------------------------------
-							csc.sendToServer(chart);
 
-							System.out.println(chart);
-
-							System.out.println(csc.recieveFromServer());
-
-							System.out.println(csc.recieveFromServer());
+							readnWriteChart(name, game, round);
 
 						} else {
-							chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
 
-							csc.sendToServer(chart);
-
-							System.out.println(chart);
-
-							System.out.println(csc.recieveFromServer());
-
-							System.out.println(csc.recieveFromServer());
-
+							readnWriteChart(name, game, round);
 						}
 
 						csc.sendToServer(String.valueOf(game.getScore()));
@@ -191,6 +145,7 @@ public class App {
 
 			}
 		});
+
 		T.start();
 	}
 
@@ -399,6 +354,7 @@ public class App {
 		} catch (IOException e) {
 
 		}
+
 		return res;
 	}
 
@@ -425,6 +381,22 @@ public class App {
 				+ "\n|_______________________________|_______________________________|_______________________________|";
 
 		return res;
+	}
+
+	public void readnWriteChart(String name, Rules game, int round) {
+
+		String chart = "";
+
+		chart = Chart(name, game.getScore(), game.getBonus(), round, game.getFinalDic());
+
+		csc.sendToServer(chart);
+
+		System.out.println(chart);
+
+		System.out.println(csc.recieveFromServer());
+
+		System.out.println(csc.recieveFromServer());
+
 	}
 
 }
