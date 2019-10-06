@@ -1,9 +1,8 @@
 @tag
-Feature: Title of your feature
-  I want to use this template for my feature file
+Feature: Tests for App class
 
   @tag1
-  Scenario: Title of your scenario
+  Scenario: To test the function HoldSomeDice
     Given I want to write a step with precondition
     And some other precondition
     When I complete action
