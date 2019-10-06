@@ -7,5 +7,3 @@ Feature: Tests for App class
     And some other precondition
     When I complete action
     Then I validate the outcomes
-
-
