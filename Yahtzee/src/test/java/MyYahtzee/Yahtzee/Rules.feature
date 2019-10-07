@@ -106,3 +106,11 @@ Feature: Tests for Rules class
     When Choose the category number 13 to score
     And Check if the results is equal to 50
     Then Verify if the result for "yahtzee function" is correct
+
+  #__________________________________________________________________________
+  @tag14
+  Scenario: Test for smallStraight function
+    Given Have the Dice with numbers  6, 2, 5, 4, 3
+    When Choose the category number 8 to score
+    And Check if the results is equal to 30
+    Then Verify if the result for "smallStraight function" is correct
