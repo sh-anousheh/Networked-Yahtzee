@@ -99,4 +99,10 @@ Feature: Tests for Rules class
     And Check if the results is equal to sum
     Then Verify if the result for "chance function" is correct
 
-
+  #__________________________________________________________________________
+  @tag13
+  Scenario: Test for yahtzee function
+    Given Have the Dice with numbers  4, 4, 4, 4, 4
+    When Choose the category number 13 to score
+    And Check if the results is equal to 50
+    Then Verify if the result for "yahtzee function" is correct
