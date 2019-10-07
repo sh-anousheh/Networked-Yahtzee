@@ -36,6 +36,13 @@ Feature: Tests for Rules class
   #__________________________________________________________________________
   @tag5
   Scenario: Test for threes function
-    Given Have the Dice with numbers  3, 2, 3, 3, 3 
+    Given Have the Dice with numbers  3, 2, 3, 3, 3
     When Choose the category number 3 to score
     Then Check if the results is 12
+
+  #__________________________________________________________________________
+  @tag6
+  Scenario: Test for fours function
+    Given Have the Dice with numbers  4, 2, 4, 3, 3
+    When Choose the category number 4 to score
+    Then Check if the results is 8
