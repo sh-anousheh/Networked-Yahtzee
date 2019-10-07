@@ -90,3 +90,13 @@ Feature: Tests for Rules class
     When Choose the category number 9 to score
     And Check if the results is equal to 25
     Then Verify if the result for "fullHouse function" is correct
+
+  #__________________________________________________________________________
+  @tag12
+  Scenario: Test for chance function
+    Given Have the Dice with numbers  3, 6, 3, 2, 5
+    When Choose the category number 12 to score
+    And Check if the results is equal to sum
+    Then Verify if the result for "chance function" is correct
+
+
