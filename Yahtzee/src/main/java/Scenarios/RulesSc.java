@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.Map;
 
 import MyYahtzee.Yahtzee.Rules;
+import MyYahtzee.Yahtzee.Rules.box;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -56,7 +57,7 @@ public class RulesSc {
 
 		} else {
 
-			System.out.println("Test for 'Roll a Die' did not Passed!");
+			System.out.println("Test for 'Roll a Die' did not Pass!");
 
 		}
 
@@ -108,11 +109,41 @@ public class RulesSc {
 
 		} else {
 
-			System.out.println("Test for 'countDice' did not Passed!");
+			System.out.println("Test for 'countDice' did not Pass!");
 
 		}
 
 	}
+
+	// __________________________________________________________________________
+
+	@Given("Have the Dice with numbers  {int}, {int}, {int}, {int}, {int}")
+	public void have_the_Dice_with_numbers(Integer int1, Integer int2, Integer int3, Integer int4, Integer int5) {
+
+		dice = new int[] { int1, int2, int3, int4, int5 };
+
+	}
+
+	@When("Choose the category number {int} to score")
+	public void choose_the_category_number_to_score(Integer int1) {
+
+		ruleClass.play(dice, 1);
+	}
+
+	@Then("Check if the results is {int}")
+	public void check_if_the_results_is(Integer int1) {
+
+		if (ruleClass.getFinalDic().get(box.Aces.name()) == int1) {
+
+			System.out.println("Test for 'ones' passed!");
+
+		} else {
+
+			System.out.println("Test for 'ones' did not pass!");
+
+		}
+	}
+
 	// __________________________________________________________________________
 
 }
