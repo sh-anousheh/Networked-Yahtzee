@@ -137,11 +137,54 @@ public class RulesSc {
 
 			break;
 
-		default:
+		case 6:
 
 			category = box.Sixes.name();
 
 			break;
+
+		case 7:
+
+			category = box.LargeStraight.name();
+
+			break;
+
+		case 8:
+
+			category = box.SmallStraight.name();
+
+			break;
+
+		case 9:
+
+			category = box.FullHouse.name();
+
+			break;
+
+		case 10:
+
+			category = box.ThreeOfAKind.name();
+
+			break;
+
+		case 11:
+
+			category = box.FourOfAKind.name();
+
+			break;
+
+		case 12:
+
+			category = box.Chance.name();
+
+			break;
+
+		default:
+
+			category = box.Yahtzee.name();
+
+			break;
+
 		}
 
 	}
@@ -157,5 +200,21 @@ public class RulesSc {
 	}
 
 	// __________________________________________________________________________
+
+	@When("Check if the results is equal to sum")
+	public void check_if_the_results_is_equal_to_sum() {
+		int sum = 0;
+
+		for (int i : dice) {
+
+			sum += i;
+		}
+
+		if (ruleClass.getFinalDic().get(category) != sum) {
+
+			pass = false;
+
+		}
+	}
 
 }

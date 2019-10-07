@@ -68,3 +68,9 @@ Feature: Tests for Rules class
     Then Verify if the result for "sixes function" is correct
 
   #__________________________________________________________________________
+  @tag9
+  Scenario: Test for threeOfAKind function
+    Given Have the Dice with numbers  6, 2, 3, 2, 2
+    When Choose the category number 10 to score
+    And Check if the results is equal to sum
+    Then Verify if the result for "threeOfAKind function" is correct
