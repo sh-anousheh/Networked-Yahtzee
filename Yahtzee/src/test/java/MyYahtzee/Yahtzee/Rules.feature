@@ -100,17 +100,26 @@ Feature: Tests for Rules class
     Then Verify if the result for "chance function" is correct
 
   #__________________________________________________________________________
-  @tag13
-  Scenario: Test for yahtzee function
-    Given Have the Dice with numbers  4, 4, 4, 4, 4
-    When Choose the category number 13 to score
-    And Check if the results is equal to 50
-    Then Verify if the result for "yahtzee function" is correct
-
+  # @tag13
+  # Scenario: Test for yahtzee function
+  #   Given Have the Dice with numbers  4, 4, 4, 4, 4
+  #   When Choose the category number 13 to score
+  #   And Check if the results is equal to 50
+  #   Then Verify if the result for "yahtzee function" is correct
   #__________________________________________________________________________
   @tag14
-  Scenario: Test for smallStraight function
-    Given Have the Dice with numbers  6, 2, 5, 4, 3
-    When Choose the category number 8 to score
-    And Check if the results is equal to 30
-    Then Verify if the result for "smallStraight function" is correct
+  Scenario Outline: Test for smallStraight function
+    Given Have the Dice with numbers  <x1>, <x2>, <x3>, <x4>, <x5>
+    When Choose the category number <category> to score
+    And Check if the results is equal to <score>
+    Then Verify if the result for "<function>" is correct
+
+    Examples: 
+      | x1 | x2 | x3 | x4 | x5 | category | score | function               |
+      |  6 |  2 |  5 |  4 |  3 |        8 |    30 | smallStraight function |
+      |  4 |  2 |  5 |  4 |  3 |        8 |    30 | smallStraight function |
+      |  4 |  6 |  5 |  4 |  3 |        8 |    30 | smallStraight function |
+      |  2 |  2 |  5 |  2 |  3 |        8 |     0 | smallStraight function |
+      |  4 |  4 |  4 |  4 |  4 |       13 |    50 | yahtzee function       |
+      |  3 |  3 |  3 |  3 |  3 |       13 |    50 | yahtzee function       |
+      |  6 |  2 |  5 |  4 |  3 |       13 |     0 | yahtzee function       |
