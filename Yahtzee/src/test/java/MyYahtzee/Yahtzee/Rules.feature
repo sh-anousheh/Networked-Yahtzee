@@ -82,3 +82,11 @@ Feature: Tests for Rules class
     When Choose the category number 11 to score
     And Check if the results is equal to sum
     Then Verify if the result for "fourOfAKind function" is correct
+
+  #__________________________________________________________________________
+  @tag11
+  Scenario: Test for fullHouse function
+    Given Have the Dice with numbers  5, 2, 5, 2, 5
+    When Choose the category number 9 to score
+    And Check if the results is equal to 25
+    Then Verify if the result for "fullHouse function" is correct

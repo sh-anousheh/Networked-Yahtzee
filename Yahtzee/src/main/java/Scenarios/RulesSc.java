@@ -217,4 +217,16 @@ public class RulesSc {
 		}
 	}
 
+	// __________________________________________________________________________
+
+	@When("Check if the results is equal to {int}")
+	public void check_if_the_results_is_equal_to(Integer int1) {
+
+		if (ruleClass.getFinalDic().get(category) != int1) {
+
+			pass = false;
+
+		}
+
+	}
 }
