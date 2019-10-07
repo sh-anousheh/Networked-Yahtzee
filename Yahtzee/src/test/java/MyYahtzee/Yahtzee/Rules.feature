@@ -27,4 +27,8 @@ Feature: Tests for Rules class
     Then Check if the results is 3
 
   #__________________________________________________________________________
- 
+  @tag4
+  Scenario: Test for twos function
+    Given Have the Dice with numbers  1, 2, 6, 4, 1
+    When Choose the category number 2 to score
+    Then Check if the results is 2

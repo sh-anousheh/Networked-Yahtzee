@@ -13,11 +13,13 @@ public class RulesSc {
 
 	private Rules ruleClass;
 
-	boolean pass;
+	private boolean pass;
 
-	int[] dice;
+	private int[] dice;
 
-	Map<Integer, Integer> counter;
+	private Map<Integer, Integer> counter;
+
+	private String category;
 
 	@Given("For All tests")
 	public void for_All_tests() {
@@ -127,19 +129,42 @@ public class RulesSc {
 	@When("Choose the category number {int} to score")
 	public void choose_the_category_number_to_score(Integer int1) {
 
-		ruleClass.play(dice, 1);
+		ruleClass.play(dice, int1);
+
+		switch (int1) {
+
+		case 1:
+			category = box.Aces.name();
+			break;
+		case 2:
+			category = box.Twos.name();
+			break;
+		case 3:
+			category = box.Threes.name();
+			break;
+		case 4:
+			category = box.Fours.name();
+			break;
+		case 5:
+			category = box.Fives.name();
+			break;
+		default:
+			category = box.Sixes.name();
+			break;
+		}
+
 	}
 
 	@Then("Check if the results is {int}")
 	public void check_if_the_results_is(Integer int1) {
 
-		if (ruleClass.getFinalDic().get(box.Aces.name()) == int1) {
+		if (ruleClass.getFinalDic().get(category) == int1) {
 
-			System.out.println("Test for 'ones' passed!");
+			System.out.println("Test for " + category + " passed!");
 
 		} else {
 
-			System.out.println("Test for 'ones' did not pass!");
+			System.out.println("Test for " + category + " did not pass!");
 
 		}
 	}
