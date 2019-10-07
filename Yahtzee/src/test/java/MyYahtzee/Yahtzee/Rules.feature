@@ -53,3 +53,10 @@ Feature: Tests for Rules class
     Given Have the Dice with numbers  4, 5, 5, 5, 3
     When Choose the category number 5 to score
     Then Check if the results is 15
+
+  #__________________________________________________________________________
+  @tag8
+  Scenario: Test for sixes function
+    Given Have the Dice with numbers  6, 5, 5, 6, 3
+    When Choose the category number 6 to score
+    Then Check if the results is 12
