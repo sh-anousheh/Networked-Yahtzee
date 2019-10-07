@@ -4,23 +4,18 @@ Feature: Tests for Rules class
   Background: 
     Given For All tests
 
+  #__________________________________________________________________________
   @tag1
   Scenario: Test for rolling function
     Given Define default answer
     When Roll a Die
     Then Check if the result is between 1 and 6
-#-------------------------------------------
-#    
-#
-# @tag2
-# Scenario Outline: Title of your scenario outline
-#   Given I want to write a step with <name>
-#   When I check for the <value> in step
-#   Then I verify the <status> in step
-#
-#   Examples:
-#     | name  | value | status  |
-#     | name1 |     5 | success |
-#     | name2 |     7 | Fail    |
-#
+
+  #__________________________________________________________________________
+  @tag2
+  Scenario: Test for countDice function
+    Given Roll the Dice
+    When Calculate count of numbers
+    And Check with the result with 0, 2, 1, 0, 0, 2
+    Then I verify if the result is correct
 #-------------------------------------------
