@@ -84,29 +84,6 @@ Feature: Tests for Rules class
     Then Verify if the result for "fourOfAKind function" is correct
 
   #__________________________________________________________________________
-  @tag11
-  Scenario: Test for fullHouse function
-    Given Have the Dice with numbers  5, 2, 5, 2, 5
-    When Choose the category number 9 to score
-    And Check if the results is equal to 25
-    Then Verify if the result for "fullHouse function" is correct
-
-  #__________________________________________________________________________
-  @tag12
-  Scenario: Test for chance function
-    Given Have the Dice with numbers  3, 6, 3, 2, 5
-    When Choose the category number 12 to score
-    And Check if the results is equal to sum
-    Then Verify if the result for "chance function" is correct
-
-  #__________________________________________________________________________
-  # @tag13
-  # Scenario: Test for yahtzee function
-  #   Given Have the Dice with numbers  4, 4, 4, 4, 4
-  #   When Choose the category number 13 to score
-  #   And Check if the results is equal to 50
-  #   Then Verify if the result for "yahtzee function" is correct
-  #__________________________________________________________________________
   @tag14
   Scenario Outline: Test for smallStraight function
     Given Have the Dice with numbers  <x1>, <x2>, <x3>, <x4>, <x5>
@@ -123,3 +100,7 @@ Feature: Tests for Rules class
       |  4 |  4 |  4 |  4 |  4 |       13 |    50 | yahtzee function       |
       |  3 |  3 |  3 |  3 |  3 |       13 |    50 | yahtzee function       |
       |  6 |  2 |  5 |  4 |  3 |       13 |     0 | yahtzee function       |
+      |  3 |  6 |  3 |  2 |  5 |       12 |    19 | chance function        |
+      |  2 |  5 |  1 |  1 |  4 |       12 |    13 | chance function        |
+      |  5 |  2 |  5 |  2 |  5 |        9 |    25 | fullHouse function     |
+      |  3 |  3 |  4 |  4 |  4 |        9 |    25 | fullHouse function     |
