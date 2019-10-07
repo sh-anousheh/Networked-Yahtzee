@@ -74,3 +74,11 @@ Feature: Tests for Rules class
     When Choose the category number 10 to score
     And Check if the results is equal to sum
     Then Verify if the result for "threeOfAKind function" is correct
+
+  #__________________________________________________________________________
+  @tag10
+  Scenario: Test for fourOfAKind function
+    Given Have the Dice with numbers  5, 5, 5, 2, 5
+    When Choose the category number 11 to score
+    And Check if the results is equal to sum
+    Then Verify if the result for "fourOfAKind function" is correct
