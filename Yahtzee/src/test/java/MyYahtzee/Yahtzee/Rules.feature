@@ -46,3 +46,10 @@ Feature: Tests for Rules class
     Given Have the Dice with numbers  4, 2, 4, 3, 3
     When Choose the category number 4 to score
     Then Check if the results is 8
+
+  #__________________________________________________________________________
+  @tag7
+  Scenario: Test for fives function
+    Given Have the Dice with numbers  4, 5, 5, 5, 3
+    When Choose the category number 5 to score
+    Then Check if the results is 15
