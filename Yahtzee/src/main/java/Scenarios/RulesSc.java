@@ -1,6 +1,9 @@
 package Scenarios;
 
 import java.util.HashMap;
+
+import junit.framework.TestCase;
+
 import java.util.Map;
 
 import MyYahtzee.Yahtzee.Rules;
@@ -9,7 +12,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class RulesSc {
+public class RulesSc extends TestCase {
 
 	private Rules ruleClass;
 
@@ -23,8 +26,8 @@ public class RulesSc {
 
 	private Map<String, Integer> scores;
 
-	@Given("For All tests")
-	public void for_All_tests() {
+	@Given("For all tests")
+	public void for_all_tests() {
 
 		ruleClass = new Rules();
 
@@ -32,18 +35,10 @@ public class RulesSc {
 
 	}
 
-	@Then("Verify if the result for {string} is correct")
-	public void verify_if_the_result_for_is_correct(String string) {
+	@Then("Verify if the result is correct")
+	public void verify_if_the_result_for_is_correct() {
 
-		if (pass) {
-
-			System.out.println("Test for " + string + " Passed!");
-
-		} else {
-
-			System.out.println("Test for " + string + " did not Pass!");
-
-		}
+		assertEquals(pass, true);
 	}
 
 	// __________________________________________________________________________
