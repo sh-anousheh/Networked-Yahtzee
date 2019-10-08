@@ -63,3 +63,16 @@ Feature: Tests for Rules class
       |  4 |  4 |  4 |  4 |  4 |       13 |    50 | yahtzee function       |
       |  3 |  3 |  3 |  3 |  3 |       13 |    50 | yahtzee function       |
       |  6 |  2 |  5 |  4 |  3 |       13 |     0 | yahtzee function       |
+
+  #__________________________________________________________________________
+  @tag4
+  Scenario Outline: Test for calculateBonus function
+    Given Get the scores of the upper section <Aces>, <Twos>, <Threes>, <Fours>, <Fives>, <Sixes>
+    When Check if there is a <bonus>
+    Then Verify if the result for "calculateBonus function" is correct
+
+    Examples: 
+      | Aces | Twos | Threes | Fours | Fives | Sixes | bonus |
+      |    3 |    8 |      3 |    16 |    15 |    30 |    35 |
+      |    3 |    8 |      6 |    12 |    10 |    24 |    35 |
+      |    3 |    2 |      6 |    12 |    10 |     6 |     0 |

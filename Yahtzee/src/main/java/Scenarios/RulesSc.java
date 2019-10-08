@@ -1,5 +1,6 @@
 package Scenarios;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import MyYahtzee.Yahtzee.Rules;
@@ -19,6 +20,8 @@ public class RulesSc {
 	private Map<Integer, Integer> counter;
 
 	private String category;
+
+	private Map<String, Integer> scores;
 
 	@Given("For All tests")
 	public void for_All_tests() {
@@ -200,5 +203,31 @@ public class RulesSc {
 	}
 
 	// __________________________________________________________________________
+
+	@Given("Get the scores of the upper section {int}, {int}, {int}, {int}, {int}, {int}")
+	public void get_the_scores_of_the_upper_section(Integer int1, Integer int2, Integer int3, Integer int4,
+			Integer int5, Integer int6) {
+
+		scores = new HashMap<String, Integer>();
+		scores.put(box.Aces.name(), int1);
+		scores.put(box.Twos.name(), int2);
+		scores.put(box.Threes.name(), int3);
+		scores.put(box.Fours.name(), int4);
+		scores.put(box.Fives.name(), int5);
+		scores.put(box.Sixes.name(), int6);
+
+	}
+
+	@When("Check if there is a {int}")
+	public void check_if_there_is_a(Integer int1) {
+
+		if (!int1.equals(ruleClass.calculateBonus(scores))) {
+
+			pass = false;
+
+		}
+	}
+
+//__________________________________________________________________________
 
 }

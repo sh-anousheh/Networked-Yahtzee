@@ -89,7 +89,7 @@ public class Rules {
 
 		}
 
-		if (sum > 63) {
+		if (sum >= 63) {
 
 			return 35;
 		}
