@@ -29,13 +29,6 @@ public class RulesSc {
 
 	}
 
-	@Given("Have the Dice with numbers  {int}, {int}, {int}, {int}, {int}")
-	public void have_the_Dice_with_numbers(Integer int1, Integer int2, Integer int3, Integer int4, Integer int5) {
-
-		dice = new int[] { int1, int2, int3, int4, int5 };
-
-	}
-
 	@Then("Verify if the result for {string} is correct")
 	public void verify_if_the_result_for_is_correct(String string) {
 
@@ -99,6 +92,13 @@ public class RulesSc {
 	}
 
 	// __________________________________________________________________________
+
+	@Given("Have the Dice with numbers  {int}, {int}, {int}, {int}, {int}")
+	public void have_the_Dice_with_numbers(Integer int1, Integer int2, Integer int3, Integer int4, Integer int5) {
+
+		dice = new int[] { int1, int2, int3, int4, int5 };
+
+	}
 
 	@When("Choose the category number {int} to score")
 	public void choose_the_category_number_to_score(Integer int1) {
@@ -201,32 +201,4 @@ public class RulesSc {
 
 	// __________________________________________________________________________
 
-	@When("Check if the results is equal to sum")
-	public void check_if_the_results_is_equal_to_sum() {
-		int sum = 0;
-
-		for (int i : dice) {
-
-			sum += i;
-		}
-
-		if (ruleClass.getFinalDic().get(category) != sum) {
-
-			pass = false;
-
-		}
-	}
-
-	// __________________________________________________________________________
-
-	@When("Check if the results is equal to {int}")
-	public void check_if_the_results_is_equal_to(Integer int1) {
-
-		if (ruleClass.getFinalDic().get(category) != int1) {
-
-			pass = false;
-
-		}
-
-	}
 }
