@@ -2,14 +2,14 @@
 Feature: Tests for Rules class
 
   Background: 
-    Given For all tests
+    Given The default return value
+    Then Verify if the result is correct
 
   #__________________________________________________________________________
   @tag1
   Scenario: Test for rolling function
     Given Roll a Die
     When Check if the result is between 1 and 6
-    Then Verify if the result is correct
 
   #__________________________________________________________________________
   @tag2
@@ -17,7 +17,6 @@ Feature: Tests for Rules class
     Given Have the Dice with numbers  3, 2, 6, 6, 2
     When Calculate count of numbers
     And Check with the result with 0, 2, 1, 0, 0, 2
-    Then Verify if the result is correct
 
   #__________________________________________________________________________
   @tag3
@@ -25,7 +24,6 @@ Feature: Tests for Rules class
     Given Have the Dice with numbers  <x1>, <x2>, <x3>, <x4>, <x5>
     When Choose the category number <category> to score
     And Check if the results is <score>
-    Then Verify if the result is correct
 
     Examples: 
       | x1 | x2 | x3 | x4 | x5 | category | score | #function               |
@@ -61,7 +59,6 @@ Feature: Tests for Rules class
   Scenario Outline: Test for calculateBonus function
     Given Get the scores of the upper section <Aces>, <Twos>, <Threes>, <Fours>, <Fives>, <Sixes>
     When Check if there is a <bonus>
-    Then Verify if the result is correct
 
     Examples: 
       | Aces | Twos | Threes | Fours | Fives | Sixes | bonus |

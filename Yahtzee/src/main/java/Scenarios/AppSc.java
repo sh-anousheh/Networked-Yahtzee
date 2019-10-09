@@ -1,6 +1,7 @@
 package Scenarios;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -9,58 +10,78 @@ import MyYahtzee.Yahtzee.Rules;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import junit.framework.TestCase;
 
-public class AppSc {
+public class AppSc extends TestCase {
+
+	private Rules ruleClass;
 
 	private App app;
 
-	private Random rand;
+	private int[] dice;
 
-	private List<Object> holds;
+	private int[] newDice;
 
-	private String input;
+	private String holds;
 
 	private boolean pass;
 
 	public AppSc() {
+
 		app = new App();
+
+		ruleClass = new Rules();
 	}
 
-	@Given("I want to write a step with precondition")
-	public void i_want_to_write_a_step_with_precondition() {
-
-		rand = new Random();
-
-		input = "";
+	@Given("Define the default return value")
+	public void define_the_default_return_value() {
 
 		pass = true;
 	}
 
-	@Given("some other precondition")
-	public void some_other_precondition() {
+	@Then("Validate the outcomes")
+	public void validate_the_outcomes() {
 
-		holds = rand.ints(1, 6).distinct().limit(4).boxed().collect(Collectors.toList());
+		assertEquals(pass, true);
 
-		for (Object o : holds) {
-
-			input += o.toString() + " ";
-		}
 	}
 
-	@When("I complete action")
-	public void i_complete_action() {
+	// __________________________________________________________________________
 
-		Rules game = new Rules();
+	@Given("The Dice  {int}, {int}, {int}, {int}, {int}")
+	public void the_Dice(Integer int1, Integer int2, Integer int3, Integer int4, Integer int5) {
 
-		int[] dice = game.rolling(5);
+		dice = new int[] { int1, int2, int3, int4, int5 };
 
-		int[] newDice = app.holdSomeDice(input, dice, game);
+	}
+
+	@Given("The dice positions to hold are {string}")
+	public void the_dice_positions_to_hold_are(String string) {
+
+		holds = string;
+
+		if (holds.isEmpty()) {
+
+			holds = " ";
+
+		}
+
+	}
+
+	@When("Re-rolle the dice")
+	public void re_rolle_the_dice() {
+
+		newDice = app.holdSomeDice(holds, dice, ruleClass);
+	}
+
+	@When("Check if the new Dice contains {string}")
+	public void check_if_the_new_Dice_contains(String string) {
 
 		int i = 0;
 
-		for (Object o : holds) {
+		for (char c : string.toCharArray()) {
 
-			if (newDice[i] != dice[Integer.parseInt(o.toString()) - 1]) {
+			if (newDice[i] != dice[Integer.parseInt(String.valueOf(c)) - 1]) {
 
 				pass = false;
 
@@ -70,16 +91,7 @@ public class AppSc {
 
 			i++;
 		}
-	}
 
-	@Then("I validate the outcomes")
-	public void i_validate_the_outcomes() {
-
-		if (pass)
-
-		{
-			System.out.println("correct answer.");
-		}
 	}
 
 }

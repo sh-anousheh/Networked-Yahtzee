@@ -13,14 +13,6 @@ public class AppTest extends TestCase {
 		app = new App();
 	}
 
-	/*
-	 * public void testReturnIntFor() {
-	 * 
-	 * int res = app.returnIntFor("Write input between 1 and 6", 6);
-	 * 
-	 * assertTrue(res > 0 && res <= 6); }
-	 */
-
 	public void testHoldSomeDice() {
 
 		Random rand = new Random();

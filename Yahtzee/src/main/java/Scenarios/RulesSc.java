@@ -26,10 +26,13 @@ public class RulesSc extends TestCase {
 
 	private Map<String, Integer> scores;
 
-	@Given("For all tests")
-	public void for_all_tests() {
+	public RulesSc() {
 
 		ruleClass = new Rules();
+	}
+
+	@Given("The default return value")
+	public void the_default_return_value() {
 
 		pass = true;
 
