@@ -94,4 +94,9 @@ public class AppSc extends TestCase {
 
 	}
 
+	// __________________________________________________________________________
+
+	/*
+	 * public void alaki() { app.play(ruleClass, 1)pass; }
+	 */
 }

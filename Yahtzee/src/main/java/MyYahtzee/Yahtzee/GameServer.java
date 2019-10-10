@@ -124,96 +124,95 @@ public class GameServer {
 
 				System.out.println(name + " has entered the game lobby!");
 
-				if (numPlayers == 3) {
+				if (numPlayers == 3)
 
-					System.out.println("\nThe game is starting!\n");
-				}
+					if (!player1.name.equals("") && !player2.name.equals("") && !player3.name.equals("")) {
 
-				Boolean conti1 = true;
+						System.out.println("\nThe game is starting!\n");
 
-				Boolean conti2 = true;
+						Boolean conti1 = true;
 
-				Boolean conti3 = true;
+						Boolean conti2 = true;
 
-				while (true) {
+						Boolean conti3 = true;
 
-					if (player1 != null && player2 != null && player3 != null)
+						while (true) {
 
-					{
+							if (player1 != null && player2 != null && player3 != null) {
 
-						readnWriteCharts();
+								readnWriteCharts();
 
-						if (Integer.parseInt(turn) == 1) {
+								if (Integer.parseInt(turn) == 1) {
 
-							conti1 = Boolean.valueOf(player1.dataIn.readUTF());
+									conti1 = Boolean.valueOf(player1.dataIn.readUTF());
 
-							turn = player1.dataIn.readUTF();
+									turn = player1.dataIn.readUTF();
 
-							System.out.println(player1.dataIn.readUTF());
+									System.out.println(player1.dataIn.readUTF());
 
-						} else if (Integer.parseInt(turn) == 2) {
+								} else if (Integer.parseInt(turn) == 2) {
 
-							conti2 = Boolean.valueOf(player2.dataIn.readUTF());
+									conti2 = Boolean.valueOf(player2.dataIn.readUTF());
 
-							turn = player2.dataIn.readUTF();
+									turn = player2.dataIn.readUTF();
 
-							System.out.println(player2.dataIn.readUTF());
+									System.out.println(player2.dataIn.readUTF());
 
-						} else {
+								} else {
 
-							conti3 = Boolean.valueOf(player3.dataIn.readUTF());
+									conti3 = Boolean.valueOf(player3.dataIn.readUTF());
 
-							turn = player3.dataIn.readUTF();
+									turn = player3.dataIn.readUTF();
 
-							System.out.println(player3.dataIn.readUTF() + "\n");
-						}
+									System.out.println(player3.dataIn.readUTF() + "\n");
+								}
 
-						player1.sendToClient(turn);
+								player1.sendToClient(turn);
 
-						player2.sendToClient(turn);
+								player2.sendToClient(turn);
 
-						player3.sendToClient(turn);
+								player3.sendToClient(turn);
 
-						if (!conti1 && !conti2 && !conti3) {
+								if (!conti1 && !conti2 && !conti3) {
 
-							readnWriteCharts();
+									readnWriteCharts();
 
-							System.out.println("\nGame Compplete.");
+									System.out.println("\nGame Compplete.");
 
-							int score1 = Integer.parseInt(player1.dataIn.readUTF());
+									int score1 = Integer.parseInt(player1.dataIn.readUTF());
 
-							int score2 = Integer.parseInt(player2.dataIn.readUTF());
+									int score2 = Integer.parseInt(player2.dataIn.readUTF());
 
-							int score3 = Integer.parseInt(player3.dataIn.readUTF());
+									int score3 = Integer.parseInt(player3.dataIn.readUTF());
 
-							String res = "";
+									String res = "";
 
-							if (score1 >= score2 && score1 >= score3) {
-								res = "\ncongratulations, " + player1.name + " has won the game with a score of "
-										+ score1 + " points";
-							} else if (score2 >= score1 && score2 >= score3) {
-								res = "\ncongratulations, " + player2.name + " has won the game with a score of "
-										+ score2 + " points";
-							} else {
-								res = "\ncongratulations, " + player3.name + " has won the game with a score of "
-										+ score3 + " points";
+									if (score1 >= score2 && score1 >= score3) {
+										res = "\ncongratulations, " + player1.name
+												+ " has won the game with a score of " + score1 + " points";
+									} else if (score2 >= score1 && score2 >= score3) {
+										res = "\ncongratulations, " + player2.name
+												+ " has won the game with a score of " + score2 + " points";
+									} else {
+										res = "\ncongratulations, " + player3.name
+												+ " has won the game with a score of " + score3 + " points";
+									}
+
+									res += "\nGreat game everyone, and thanks for playing. Goodbye.";
+
+									player1.sendToClient(res);
+
+									player2.sendToClient(res);
+
+									player3.sendToClient(res);
+
+									System.out.println(res);
+
+									break;
+								}
 							}
-
-							res += "\nGreat game everyone, and thanks for playing. Goodbye.";
-
-							player1.sendToClient(res);
-
-							player2.sendToClient(res);
-
-							player3.sendToClient(res);
-
-							System.out.println(res);
-
-							break;
 						}
 					}
-				}
-
 			} catch (IOException e) {
 
 				System.out.println("IOException from run() SSC");

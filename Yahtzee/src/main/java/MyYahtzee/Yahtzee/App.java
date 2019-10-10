@@ -1,6 +1,7 @@
 package MyYahtzee.Yahtzee;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -170,9 +171,7 @@ public class App {
 
 				playerID = dataIn.readInt();
 
-				System.out.println("Welcome player " + playerID + ", please enter your name:");
-
-				name = reader.readLine();
+				name = returnStringFor("Welcome player " + playerID + ", please enter your name:");
 
 				sendToServer(name);
 
@@ -214,7 +213,7 @@ public class App {
 		}
 	}
 
-	private void play(Rules game, int round) {
+	public void play(Rules game, int round) {
 
 		String enterKey = "";
 
