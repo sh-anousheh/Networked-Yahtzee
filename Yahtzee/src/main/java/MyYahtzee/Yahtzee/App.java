@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import MyYahtzee.Yahtzee.Rules.box;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
@@ -18,7 +19,7 @@ public class App {
 
 	private int maxRound;
 
-	private String name;
+	private String name = "";
 
 	private ClientSideConnection csc;
 
@@ -35,6 +36,14 @@ public class App {
 	public static void main(String[] args) {
 
 		App app = new App();
+
+		try {
+
+			app.name = args[0];
+
+		} catch (Exception e) {
+
+		}
 
 		app.connectToServer();
 
@@ -171,7 +180,10 @@ public class App {
 
 				playerID = dataIn.readInt();
 
-				name = returnStringFor("Welcome player " + playerID + ", please enter your name:");
+				if (name.isEmpty()) {
+
+					name = returnStringFor("Welcome player " + playerID + ", please enter your name:");
+				}
 
 				sendToServer(name);
 

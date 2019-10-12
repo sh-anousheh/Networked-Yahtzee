@@ -1,41 +1,73 @@
 package Scenarios;
 
-import MyYahtzee.Yahtzee.App;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 import MyYahtzee.Yahtzee.GameServer;
-import MyYahtzee.Yahtzee.Rules;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import junit.framework.TestCase;
 
-public class GameServerSc {
+public class GameServerSc extends TestCase {
 
-	@Given("I want to write a step with precondition")
-	public void i_want_to_write_a_step_with_precondition() {
+	private GameServer gs;
 
-		Thread T = new Thread(new Runnable() {
+	private boolean pass;
+
+	private List<String> input;
+
+	Thread T;
+
+	@Given("The game is started")
+	public void the_game_is_started() {
+
+		pass = true;
+
+		input = new ArrayList<String>();
+
+		T = new Thread(new Runnable() {
 
 			public void run() {
-				GameServer.main(null);
+
+				gs = new GameServer();
+
+				gs.acceptConnections();
 
 			}
 		});
 
 		T.start();
-		App.main(null);
-		// App.this.holdSomeDice(
-		App.main(null);
-		App.main(null);
 
 	}
 
-	@When("I complete action")
-	public void i_complete_action() {
+	@When("{string} would enter the game")
+	public void would_enter_the_game(String string) {
+
+		for (String s : string.split(","))
+
+		{
+			input.add(s);
+
+			FakePlayer.main(new String[] { s });
+		}
 
 	}
 
-	@Then("I validate the outcomes")
-	public void i_validate_the_outcomes() {
+	@When("Check if {string}could enter successfully")
+	public void check_if_could_enter_successfully(String string) {
 
+		if (!input.toString().equals(gs.getPlayers().toString())) {
+
+			pass = false;
+		}
 	}
 
+	@Then("validate if the result is {string}")
+	public void validate_if_the_result_is(String string) {
+
+		assertEquals(string, String.valueOf(pass));
+
+	}
 }

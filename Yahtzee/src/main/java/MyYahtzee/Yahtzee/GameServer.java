@@ -2,6 +2,8 @@ package MyYahtzee.Yahtzee;
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameServer {
 
@@ -15,7 +17,16 @@ public class GameServer {
 
 	private ServerSideConnection player3;
 
+	private List<String> playersList;
+
+	public List<String> getPlayers() {
+
+		return playersList;
+	}
+
 	public GameServer() {
+
+		playersList = new ArrayList<String>();
 
 		System.out.println("Yahtzee Game Engine has been starting.");
 
@@ -61,11 +72,15 @@ public class GameServer {
 				Thread t = new Thread(SSC);
 
 				t.start();
+
 			}
+
+			ss.close();
 
 		} catch (IOException ex) {
 
 			System.out.println("IOException from accepting connections()");
+
 		}
 	}
 
@@ -123,6 +138,8 @@ public class GameServer {
 				name = dataIn.readUTF();
 
 				System.out.println(name + " has entered the game lobby!");
+
+				playersList.add(name);
 
 				if (numPlayers == 3)
 
