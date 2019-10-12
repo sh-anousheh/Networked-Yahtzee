@@ -55,17 +55,21 @@ public class GameServerSc extends TestCase {
 
 	}
 
-	@When("Check if {string}could enter successfully")
-	public void check_if_could_enter_successfully(String string) {
+	@When("Check if they could enter successfully")
+	public void check_if_they_could_enter_successfully() {
 
 		if (!input.toString().equals(gs.getPlayers().toString())) {
 
 			pass = false;
+
 		}
+
 	}
 
 	@Then("validate if the result is {string}")
 	public void validate_if_the_result_is(String string) {
+
+		gs = null;
 
 		assertEquals(string, String.valueOf(pass));
 

@@ -5,11 +5,11 @@ Feature: Tests for GameServer class
   Scenario Outline: Test for joining the game
     Given The game is started
     When "<List of players(comma separated)>" would enter the game
-    And Check if "<List of players(comma separated)>"could enter successfully
+    And Check if they could enter successfully
     Then validate if the result is "<res>"
 
     Examples: 
       | List of players(comma separated) | res   |
       | Anousheh                         | true  |
-      | Anousheh,Ryan,Julie              | true  |
       | Anousheh,Ryan,Julie,Brayana      | false |
+      | Anousheh,Ryan,Julie              | true  |
