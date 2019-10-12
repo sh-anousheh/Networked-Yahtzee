@@ -1,15 +1,13 @@
-package Scenarios;
+package FakePlayers;
 
 import java.io.BufferedReader;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 
-public class FakePlayer {
-
+public class Player1 {
 	private BufferedReader reader;
 
 	private int maxRound;
@@ -20,7 +18,7 @@ public class FakePlayer {
 
 	private int playerID;
 
-	public FakePlayer() {
+	public Player1() {
 
 		reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -28,7 +26,7 @@ public class FakePlayer {
 
 	public static void main(String[] args) {
 
-		FakePlayer app = new FakePlayer();
+		Player1 app = new Player1();
 
 		try {
 
@@ -60,7 +58,7 @@ public class FakePlayer {
 
 			try {
 
-				socket = new Socket("localhost", 51734);
+				socket = new Socket("localhost", 51731);
 
 				dataIn = new DataInputStream(socket.getInputStream());
 
