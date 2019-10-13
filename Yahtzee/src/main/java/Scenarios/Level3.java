@@ -63,7 +63,7 @@ public class Level3 {
 
 		try {
 
-			Thread.sleep(100);
+			Thread.sleep(80);
 
 		} catch (InterruptedException e) {
 
@@ -80,7 +80,9 @@ public class Level3 {
 			String category) {
 
 		Scanner scanner;
+
 		try {
+
 			scanner = new Scanner(new File("results.txt"));
 
 			while (scanner.hasNextLine()) {
@@ -97,9 +99,13 @@ public class Level3 {
 					}
 				}
 			}
+			scanner.close();
+
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();
+		} finally {
+
 		}
 
 	}

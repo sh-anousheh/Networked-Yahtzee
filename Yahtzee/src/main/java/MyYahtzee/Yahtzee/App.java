@@ -172,7 +172,7 @@ public class App {
 
 			try {
 
-				socket = new Socket("localhost", 51734);
+				socket = new Socket("localhost", 51739);
 
 				dataIn = new DataInputStream(socket.getInputStream());
 

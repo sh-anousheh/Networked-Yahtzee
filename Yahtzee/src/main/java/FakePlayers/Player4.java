@@ -109,7 +109,7 @@ public class Player4 {
 
 								csc.sendToServer(String.valueOf(turn));
 
-								csc.sendToServer("Player " + playerID + " has completed the game.");
+								// csc.sendToServer("Player " + playerID + " has completed the game.");
 
 							} else if (round == maxRound) {
 
@@ -130,7 +130,7 @@ public class Player4 {
 
 								csc.sendToServer(String.valueOf(turn));
 
-								csc.sendToServer("Player " + playerID + " has completed the game.");
+								// csc.sendToServer("Player " + playerID + " has completed the game.");
 
 							}
 
@@ -217,7 +217,6 @@ public class Player4 {
 
 			} catch (IOException e) {
 
-				// System.out.println("IOException from sendToServer() CSC");
 			}
 		}
 
@@ -374,7 +373,7 @@ public class Player4 {
 
 				res.put(round - 1, chart);
 
-				System.out.println(String.valueOf(chart));
+				// System.out.println(String.valueOf(chart));
 
 				Level3.writer.println(String.format("%02d", ++Level3.rowNum) + "," + chart);
 

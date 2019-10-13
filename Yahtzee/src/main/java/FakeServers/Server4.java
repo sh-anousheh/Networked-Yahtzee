@@ -164,7 +164,7 @@ public class Server4 {
 
 									turn = player1.dataIn.readUTF();
 
-									System.out.println(player1.dataIn.readUTF());
+									// System.out.println(player1.dataIn.readUTF());
 
 								} else if (Integer.parseInt(turn) == 2) {
 
@@ -172,7 +172,7 @@ public class Server4 {
 
 									turn = player2.dataIn.readUTF();
 
-									System.out.println(player2.dataIn.readUTF());
+									// System.out.println(player2.dataIn.readUTF());
 
 								} else {
 
@@ -180,7 +180,7 @@ public class Server4 {
 
 									turn = player3.dataIn.readUTF();
 
-									System.out.println(player3.dataIn.readUTF() + "\n");
+									// System.out.println(player3.dataIn.readUTF() + "\n");
 								}
 
 								player1.sendToClient(turn);

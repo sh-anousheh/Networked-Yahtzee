@@ -34,7 +34,7 @@ public class GameServer {
 
 		try {
 
-			ss = new ServerSocket(51734);
+			ss = new ServerSocket(51739);
 
 		} catch (IOException e) {
 
