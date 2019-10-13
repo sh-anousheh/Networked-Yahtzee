@@ -22,6 +22,7 @@ public class Server4 {
 	public List<String> getPlayers() {
 
 		return playersList;
+
 	}
 
 	public Server4() {
@@ -157,8 +158,6 @@ public class Server4 {
 
 							if (player1 != null && player2 != null && player3 != null) {
 
-								// readnWriteCharts();
-
 								if (Integer.parseInt(turn) == 1) {
 
 									conti1 = Boolean.valueOf(player1.dataIn.readUTF());
@@ -192,8 +191,6 @@ public class Server4 {
 
 								if (!conti1 && !conti2 && !conti3) {
 
-									// readnWriteCharts();
-
 									System.out.println("\nGame Compplete.");
 
 									int score1 = Integer.parseInt(player1.dataIn.readUTF());
@@ -217,12 +214,6 @@ public class Server4 {
 
 									res += "\nGreat game everyone, and thanks for playing. Goodbye.";
 
-									player1.sendToClient(res);
-
-									player2.sendToClient(res);
-
-									player3.sendToClient(res);
-
 									System.out.println(res);
 
 									break;
@@ -234,21 +225,6 @@ public class Server4 {
 
 				System.out.println("IOException from run() SSC");
 			}
-		}
-
-		public void readnWriteCharts() {
-			try {
-
-				String chart1 = player1.dataIn.readUTF();
-
-				String chart2 = player2.dataIn.readUTF();
-
-				String chart3 = player3.dataIn.readUTF();
-
-			} catch (IOException ex) {
-
-			}
-
 		}
 
 		public void sendToClient(String chart) {

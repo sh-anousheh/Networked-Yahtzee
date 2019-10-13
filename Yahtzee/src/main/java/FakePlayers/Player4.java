@@ -4,12 +4,13 @@ import java.io.BufferedReader;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import MyYahtzee.Yahtzee.Rules;
-import MyYahtzee.Yahtzee.Rules.box;
+import Scenarios.Level3;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -88,8 +89,6 @@ public class Player4 {
 
 					if (conti) {
 
-						// readnWriteChart(name, game, round);
-
 						if (turn == playerID) {
 
 							readnWriteChart(name, game, round);
@@ -143,25 +142,19 @@ public class Player4 {
 
 					else {
 
-						readnWriteChart(name, game, round);
-
 						if (turn == 2) {
 
 							turn = Integer.parseInt(csc.recieveFromServer());
 
-							readnWriteChart(name, game, round);
-
 							turn = Integer.parseInt(csc.recieveFromServer());
-
-							readnWriteChart(name, game, round);
 
 						} else if (turn == 3) {
 
 							turn = Integer.parseInt(csc.recieveFromServer());
 
-							readnWriteChart(name, game, round);
-
 						}
+
+						readnWriteChart(name, game, round);
 
 						csc.sendToServer(String.valueOf(game.getScore()));
 
@@ -224,7 +217,7 @@ public class Player4 {
 
 			} catch (IOException e) {
 
-				System.out.println("IOException from sendToServer() CSC");
+				// System.out.println("IOException from sendToServer() CSC");
 			}
 		}
 
@@ -257,16 +250,6 @@ public class Player4 {
 
 			Arrays.sort(dice);
 
-			/*
-			 * System.out.println(String.format("Your rolled:\t|%d|\t|%d|\t|%d|\t|%d|\t|%d|"
-			 * , dice[0], dice[1], dice[2], dice[3], dice[4]));
-			 */
-
-			/*
-			 * action = returnIntFor("What action do you like to perform next?" +
-			 * "\n(1) Select dice to hold and then re-roll the other dice?" +
-			 * "\n(2) Re-roll all the dice?" + "\n(3) Score this round?", 3);
-			 */
 			action = 3;
 
 			switch (action) {
@@ -392,9 +375,11 @@ public class Player4 {
 				res.put(round - 1, chart);
 
 				System.out.println(String.valueOf(chart));
+
+				Level3.writer.println(String.format("%02d", ++Level3.rowNum) + "," + chart);
+
 			}
-			// csc.sendToServer(chart);
-			// System.out.println(String.valueOf(res));
+
 		}
 
 	}
