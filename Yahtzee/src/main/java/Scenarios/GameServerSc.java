@@ -6,10 +6,11 @@ import java.util.List;
 import FakePlayers.Player1;
 import FakePlayers.Player2;
 import FakePlayers.Player3;
+import FakePlayers.Player5;
 import FakeServers.Server1;
 import FakeServers.Server2;
 import FakeServers.Server3;
-import MyYahtzee.Yahtzee.GameServer;
+import FakeServers.Server5;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -161,6 +162,71 @@ public class GameServerSc extends TestCase {
 			pass = false;
 
 		}
+		assertEquals(true, pass);
+	}
+	// _____________________________________________________________________
+
+	Server5 gs;
+
+	@Given("The game is started with the socket {int}")
+	public void the_game_is_started_with_the_socket(Integer int1) {
+
+		final int socket = int1;
+
+		pass = true;
+
+		Thread T = new Thread(new Runnable() {
+
+			public void run() {
+
+				gs = new Server5(socket);
+
+				gs.acceptConnections();
+
+			}
+		});
+
+		T.start();
+
+	}
+
+	@Given("Anousheh, Ryan, and Brayana join the game")
+	public void anousheh_Ryan_and_Brayana_join_the_game() {
+
+		Player5.main(new String[] { "Anousheh" });
+
+		Player5.main(new String[] { "Ryan" });
+
+		Player5.main(new String[] { "Brayana" });
+	}
+
+	@When("It is the end of the game")
+	public void it_is_the_end_of_the_game() {
+
+		try {
+
+			Thread.sleep(80);
+
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+
+		}
+
+	}
+
+	@When("Check if isFinish is <{string}>")
+	public void check_if_isFinish_is(String string) {
+
+		if (!Boolean.valueOf(string).equals(gs.isFinish())) {
+
+			pass = false;
+		}
+	}
+
+	@Then("Validate the result")
+	public void validate_the_result() {
+
 		assertEquals(true, pass);
 	}
 
