@@ -1,6 +1,5 @@
 @tag
-Feature: Title of your feature
-  I want to use this template for my feature file
+Feature: Testcases for tackling a  3-player game from beginning to end
 
   @tag1
   Scenario Outline: Testcases for tackling a  3-player game from beginning to end
