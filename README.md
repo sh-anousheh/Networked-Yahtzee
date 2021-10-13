@@ -22,5 +22,5 @@ Yahtzee is a simple game whose rules can be found at http://www.yahtzee.org.uk/r
 * Cucumber
 
 ### Running The Project
-* To run the game, first click right on GameServer class and run it as Java Application. Then, run App class as Java Application and enter the name of the first player. Again run App class for the second time and enter the second player’s name. Repeat this process for the third player. Now you have a console page for the server and three console page for the players.
-* Different senarios and acceptance tests and their respective files is defined in the AccTest.rtf file.
+* To run the game, first click right on GameServer class and run it as Java Application. Then, run the App class as Java Application and enter the name of the first player. Again run App class for the second time and insert the second player’s name. Repeat this process for the third player. Now you have a console page for the server and three console pages for the players.
+* Different scenarios and acceptance tests and their respective files are defined in the AccTest.rtf file.
