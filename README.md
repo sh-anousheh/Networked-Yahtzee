@@ -1,7 +1,7 @@
 # Networked Turned Based Yahtzee Game
 This project is first implemented using TDD approach associating Junit tests. Then, Cucumber is used for the final user defined, and senario based tests.
 
-##  Objective
+###  Objective
 This project is an individual assignment done for COMP 5104 at Carleton University in the fall semester of 2019.
 
 
