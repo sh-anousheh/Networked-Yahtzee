@@ -21,5 +21,6 @@ Yahtzee is a simple game whose rules can be found at http://www.yahtzee.org.uk/r
 * JUnit
 * Cucumber
 
-### Installation and Running The Project Through Eclipse EE
-
+### Running The Project
+* To run the game, first click right on GameServer class and run it as Java Application. Then, run App class as Java Application and enter the name of the first player. Again run App class for the second time and enter the second player’s name. Repeat this process for the third player. Now you have a console page for the server and three console page for the players.
+* Different senarios and acceptance tests and their respective files is defined in the AccTest.rtf file.
